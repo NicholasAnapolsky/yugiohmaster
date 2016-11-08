@@ -12,7 +12,8 @@
     {
         <tr>
             <td>
-                <a href=@Href("~/Gear/Details", @item.ProductCategoryID)>@item.Name</a>
+                @Html.ActionLink(@item.Name, "Details", new { id = item.ProductCategoryID }, new { @class = "list-brand" })
+                <br />
             </td>
         </tr>
     }
