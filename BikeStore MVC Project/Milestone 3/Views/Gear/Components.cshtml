@@ -1,0 +1,19 @@
+﻿@model IEnumerable<MileStone2A.Models.ProductCategory>
+
+@{
+    ViewBag.Title = "Components";
+}
+
+<h2>Components</h2>
+
+<table class="table">
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href=@Href("~/Gear/Details", @item.ProductCategoryID)>@item.Name</a>
+        </td>
+    </tr>
+}
+
+</table>

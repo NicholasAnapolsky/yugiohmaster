@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "ContactResult";
+
+    var header = "";
+    var body = "";
+    if (ViewBag.Status != null)
+    {
+        var status = ViewBag.Status.Split('|');
+        header = status[0];
+        body = status[1];
+    }
+}
+
+@if (ViewBag.Status != null)
+{
+    <h1>@header</h1><br>
+    <h2>@body</h2>
+}
+
+

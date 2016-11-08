@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+    <script src="~/Content/jquery-3.1.1.min.js"></script>
+    <title>@ViewBag.Title - Bikes 'R' Us</title>
+    @Scripts.Render("~/bundles/modernizr")
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $(".body-content").css("transition", "all 0.4s 0s ease");            
+            $(".body-content").css("opacity", "1");
+        })
+        $(window).on('beforeunload', function () {
+            $(".body-content").css("transition", "all 0.4s 0s ease");
+            $(".body-content").css("opacity", "0");
+        });
+    </script>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="background-image"></div>
+        <nav>
+            <div class="nav-content">
+                @Html.ActionLink(".", "Index", "Home", new { area = "" }, new { @class = "logo" })
+                <hr />
+                <div class="nav-link">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+            </div>
+        </nav>
+        <div class="body-content" id="fade">
+            @RenderBody()
+        </div>
+        <footer><p>@DateTime.Now.Year - &copy; Bikes 'R' Us'</p></footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+</body>
+</html>
