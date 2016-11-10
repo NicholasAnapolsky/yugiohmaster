@@ -63,5 +63,20 @@ namespace Milestone2B.Controllers
             }
             return View(gear.ToList());
         }
+        
+        // GET: Bikes/ProductDetails/5
+        public ActionResult ProductDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
     }
 }
