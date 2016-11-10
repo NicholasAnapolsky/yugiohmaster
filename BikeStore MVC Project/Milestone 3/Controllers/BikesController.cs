@@ -13,7 +13,7 @@ namespace MileStone2A.Controllers
     public class BikesController : Controller
     {
         private BikeDBContext db = new BikeDBContext();
-
+        const int DEFAULT_BIKE_CATEGORY_ID = 5;
         // GET: Bikes
         public ActionResult Index()
         {
@@ -24,15 +24,22 @@ namespace MileStone2A.Controllers
             return View(categories.ToList());
         }
 
-        public ActionResult Index2(string searchString)
+        public ActionResult Index2(string searchString, string sortString)
         {
-            var categories = from x in db.Products select x;
+            ViewBag.SearchString = searchString;
 
+            var filterQry = from x in db.ProductCategories select new SelectListItem { Value = x.ProductCategoryID.ToString(), Text = x.Name};
+            ViewBag.FilterList = filterQry;
+
+            var categories = from x in db.Products select x;
+            if(!String.IsNullOrEmpty(sortString))
+            {
+                sortString = sortString;
+            }
             if (!String.IsNullOrEmpty(searchString))
             {
                 categories = categories.Where(s => s.Name.Contains(searchString));
             }
-
             return View(categories.ToList());
         }
         public ActionResult Mountain()

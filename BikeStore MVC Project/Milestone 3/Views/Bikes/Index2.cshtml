@@ -2,9 +2,21 @@
 
 @{
     ViewBag.Title = "Index2";
+    var searchString = ViewBag.SearchString;
 }
 
 <h2>Index2</h2>
+@using (Html.BeginForm())
+{
+    <p>
+            <div class="col-md-10">
+                @Html.DropDownList("FilterList ", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        Title: @Html.TextBox("SortString")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
 
 <table class="table">
     <tr>
