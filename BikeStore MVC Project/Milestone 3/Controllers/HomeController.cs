@@ -102,5 +102,20 @@ namespace Milestone2B.Controllers
 
             return View();
         }
+
+        public JsonResult ExistingEmail(string Email)
+        {
+            var existingEmail = (from x in db.Managers
+                                 where x.Email == Email
+                                 select x).Count();
+            var result = existingEmail > 0;
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult _Login()
+        {
+            ViewBag.Managers = db.Managers;
+            return View();
+        }
     }
 }
