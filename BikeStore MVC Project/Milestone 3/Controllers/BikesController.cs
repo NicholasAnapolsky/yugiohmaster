@@ -24,6 +24,17 @@ namespace MileStone2A.Controllers
             return View(categories.ToList());
         }
 
+        public ActionResult Index2(string searchString)
+        {
+            var categories = from x in db.Products select x;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                categories = categories.Where(s => s.Name.Contains(searchString));
+            }
+
+            return View(categories.ToList());
+        }
         public ActionResult Mountain()
         {
             var mountain = from x in db.ProductAndDescription
@@ -65,7 +76,7 @@ namespace MileStone2A.Controllers
         }
 
         // GET: Bikes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string searchString)
         {
             if (id == null)
             {
@@ -74,6 +85,16 @@ namespace MileStone2A.Controllers
             var ProductDescription = from x in db.Products
                                      where x.ProductModelID == id
                                      select x;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ProductDescription = from x in db.Products
+                                     where x.ProductModelID == id && x.Name.Contains(searchString)
+                                     select x;
+                //categories = categories.Where(s => s.Name.Contains(searchString));
+            }
+
+            
 
             if (ProductDescription == null)
             {

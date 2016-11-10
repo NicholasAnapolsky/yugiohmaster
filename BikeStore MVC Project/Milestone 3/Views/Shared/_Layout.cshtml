@@ -29,6 +29,10 @@
                         @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
                         @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
                         @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                   
+                        @using (Html.BeginForm("Index2", "Bikes"))
+                        {@Html.TextBox("SearchString") <input type="submit" value="Search" />}
+                    
                 </div>
             </div>
         </nav>
