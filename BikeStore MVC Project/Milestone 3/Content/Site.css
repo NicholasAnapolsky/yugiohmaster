@@ -1,4 +1,5 @@
 ﻿
+
 body {
     margin: 0;
     background-image: url("~/Content/images/img1.jpg");
@@ -620,3 +621,21 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%;
 }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.active{background-color:greenyellow;}

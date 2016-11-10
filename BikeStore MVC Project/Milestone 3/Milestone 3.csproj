@@ -230,12 +230,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\demo.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\img2.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\jquery-3.1.1.min.js" />
+    <Content Include="Content\jquery.custom-file-input.js" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\gj.jpg" />
     <Content Include="favicon.ico" />
