@@ -58,6 +58,7 @@ namespace Milestone_3.Controllers
 
         public ActionResult Create()
         {
+            
             var BikeCategories = from x in db.ProductCategories
                                  where x.ParentProductCategoryID == 1
                                  select x;
@@ -73,7 +74,10 @@ namespace Milestone_3.Controllers
                                  Text = x.ProductModel.Name
                              }).Distinct();
             ViewBag.ProductModelID = BikeModels;
-
+            if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 

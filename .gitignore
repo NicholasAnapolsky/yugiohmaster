@@ -8,3 +8,5 @@ BikeStore MVC Project/Milestone 3/bin/Milestone 3.pdb
 BikeStore MVC Project/Milestone 3/bin/Milestone 3.dll
 *.suo
 BikeStore MVC Project/Milestone 3/Web.config
+*.suo
+*.dll
