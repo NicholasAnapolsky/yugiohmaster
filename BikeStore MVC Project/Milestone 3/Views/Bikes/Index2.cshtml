@@ -9,10 +9,7 @@
 @using (Html.BeginForm())
 {
     <p>
-            <div class="col-md-10">
-                @Html.DropDownList("FilterList ", null, htmlAttributes: new { @class = "form-control" })
-            </div>
-        Title: @Html.TextBox("SortString")
+        Title: @Html.TextBox("SearchString")
         <input type="submit" value="Filter" />
     </p>
 }
@@ -59,12 +56,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ThumbnailPhotoFileName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.rowguid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </th>
         <th></th>
     </tr>
 
@@ -106,15 +97,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.DiscontinuedDate)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThumbnailPhotoFileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rowguid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedDate)
-        </td>
+        @if (item.ThumbnailPhotoFileName == null)
+        {
+            <td>
+                No image for this bicycle.
+            </td>
+        }
+        else
+        {
+            var image = item.ThumbNailPhoto;
+            <td>
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(image))" />
+            </td>
+        }
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |

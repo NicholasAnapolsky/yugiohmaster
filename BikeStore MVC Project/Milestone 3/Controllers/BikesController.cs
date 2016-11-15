@@ -24,24 +24,25 @@ namespace MileStone2A.Controllers
             return View(categories.ToList());
         }
 
-        public ActionResult Index2(string searchString, string sortString)
+        public ActionResult Index2()
         {
-            ViewBag.SearchString = searchString;
-
-            var filterQry = from x in db.ProductCategories select new SelectListItem { Value = x.ProductCategoryID.ToString(), Text = x.Name};
-            ViewBag.FilterList = filterQry;
-
             var categories = from x in db.Products select x;
-            if(!String.IsNullOrEmpty(sortString))
+ 
+            return View(categories.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index2(string SearchString)
+        {
+            var categories = from x in db.Products select x;
+
+            if (!String.IsNullOrEmpty(SearchString))
             {
-                sortString = sortString;
-            }
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                categories = categories.Where(s => s.Name.Contains(searchString));
+                categories = categories.Where(s => s.Name.Contains(SearchString));
             }
             return View(categories.ToList());
         }
+
         public ActionResult Mountain()
         {
             var mountain = from x in db.ProductAndDescription
