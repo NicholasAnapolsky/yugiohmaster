@@ -8,7 +8,7 @@
 
 @foreach (var item in Model)
 {
-    <a href="@Href("~/Bikes/Details", @item.ProductModelID)">@item.ProductModel</a>
+    @Html.ActionLink(@item.ProductModel, "Details", new { id = @item.ProductModelID }, new { @class = "list-brand" })
     <br>
     <p>@item.Description</p>
     <br>

@@ -6,7 +6,8 @@
 
 <h2>Our Gear</h2>
 
-@foreach (var item in Model) {
-    <a href=@Href("~/Gear", @item.Name)>@item.Name</a>
-    <br>
+@foreach (var item in Model)
+{
+    @Html.ActionLink(@item.Name, @item.Name, new { area = "" }, new { @class = "list-brand" })
+    <br />
 }

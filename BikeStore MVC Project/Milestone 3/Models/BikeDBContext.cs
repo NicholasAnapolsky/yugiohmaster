@@ -19,5 +19,6 @@ namespace MileStone2A.Models
         public DbSet<ProductAndDescription2> ProductAndDescription { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductModel> ProductModel { get; set; }
+        public DbSet<Managers> Managers { get; set; }
     }
 }

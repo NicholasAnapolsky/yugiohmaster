@@ -135,5 +135,46 @@ namespace Milestone2B.Controllers
 
             return View();
         }
+
+        public ActionResult _Login()
+        {            
+            return PartialView(new Managers());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Login(Managers managers)
+        {
+            var managerQuery = from x in db.Managers
+                               where x.Email == managers.Email &&
+                               x.Password == managers.Password
+                               select x;
+            if ((string)Session["LoggedIn"] == "true")
+            {
+                Session["LoggedIn"] = "false";
+            }
+            else
+            {
+                if (managerQuery.Count() > 0)
+                {
+                    var dbManagers = managerQuery.First();
+                    if (ModelState.IsValid)
+                    {
+                        Session["LoggedIn"] = "true";
+                        Session["User"] = dbManagers.FirstName;
+                        return PartialView(dbManagers);
+                    }
+                }
+                else
+                {
+                    ViewBag.NonExistingManager = true;
+                    ViewBag.NonExistingManagerError = "This manager does not exist.";
+                }
+            }
+
+            Session["LoggedIn"] = "false";
+
+            return PartialView(managers);
+        }
     }
 }

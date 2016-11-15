@@ -6,7 +6,8 @@
 
 <h2>Our Bike Selection</h2>
 
-@foreach (var item in Model) {
-    <a href="@Href("~/Bikes", @item.Name.Split()[0])">@item.Name</a>
-    <br>
+@foreach (var item in Model)
+{
+    @Html.ActionLink(@item.Name, @item.Name.Split()[0], new { area = "" }, new { @class = "list-brand" })
+    <br />
 }
