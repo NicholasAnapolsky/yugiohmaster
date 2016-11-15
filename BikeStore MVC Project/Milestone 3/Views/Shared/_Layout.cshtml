@@ -2,6 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/site.css" type="text/css" />
     <script src="~/Content/jquery-3.1.1.min.js"></script>
     <title>@ViewBag.Title - Bikes 'R' Us</title>
     @Scripts.Render("~/bundles/modernizr")
@@ -24,27 +25,19 @@
                 @Html.ActionLink(".", "Index", "Home", new { area = "" }, new { @class = "logo" })
                 <hr />
                 <div class="nav-link">
-<<<<<<< HEAD
-                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
                    
-                        @using (Html.BeginForm("Index2", "Home"))
-                        {@Html.TextBox("SearchString") <input type="submit" value="Search" />}
-                    
-=======
                     @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                    @using (Html.BeginForm("Index2", "Home"))
+                    {@Html.TextBox("SearchString") <input type="submit" value="Search" />}
                 </div>
                 <hr />
                 <div class="login">
                     @Html.Action("_Login", "Home")
->>>>>>> refs/remotes/origin/master
                 </div>
             </div>
         </nav>
