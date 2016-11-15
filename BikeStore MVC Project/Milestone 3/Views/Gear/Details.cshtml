@@ -33,7 +33,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.Name).ToString(), "ProductDetails", new { id = item.ProductID }, new { @class = "otherlink" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProductNumber)

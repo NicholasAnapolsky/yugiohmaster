@@ -21,6 +21,8 @@ namespace MileStone2A.Controllers
                              where x.ParentProductCategoryID == 1
                              select x;
 
+            ViewBag.Products = db.Products;
+
             return View(categories.ToList());
         }
 
@@ -81,5 +83,24 @@ namespace MileStone2A.Controllers
             }
             return View(ProductDescription);
         }
+        
+        // GET: Bikes/ProductDetails/5
+        public ActionResult ProductDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Product product = db.Products.Find(id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(product);
+        }
+
     }
 }
