@@ -1,0 +1,2 @@
+﻿select p.Name, pd.ProductModel, pd.[Description] from (SalesLT.vProductAndDescription2 pd join SalesLT.ProductModel m on pd.ProductModelID = m.ProductModelID) join SalesLT.Product p on m.ProductModelID = p.ProductModelID
+where pd.Culture = 'en'

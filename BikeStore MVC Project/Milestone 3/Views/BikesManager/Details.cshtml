@@ -1,4 +1,4 @@
-﻿@model MileStone2A.Models.Product
+﻿@model MileStone2A.Models.ProductAndDescription2
 
 @{
     ViewBag.Title = "Details";
@@ -12,7 +12,7 @@
     <h4>Product</h4>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ProductCategory.Name)
+            @Html.DisplayNameFor(model => model.ProductModelTable.Product.ProductCategory.Name)
         </dt>
 
         <dd>

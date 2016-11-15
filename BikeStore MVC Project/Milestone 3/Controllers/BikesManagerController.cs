@@ -32,12 +32,17 @@ namespace Milestone_3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+
+            var productWithDescription = (from x in db.ProductAndDescription
+                                         where x.Culture == "en" && x.ProductModelTable.Product.ProductID == id
+                                         select x).First();
+
+            //Product product = db.Products.Find(id);
+            if (productWithDescription == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(productWithDescription);
         }
         /*
         // GET: BikesManager/Create
