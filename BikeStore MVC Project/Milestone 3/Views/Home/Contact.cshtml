@@ -41,9 +41,9 @@
             </td>
         </tr>
     </table>
-
-    @Html.Captcha("Try another", "Enter the text you see above:", numberOfCaptchaChars, "Is required field")
-
+    <div class="captcha">
+        @Html.Captcha("Try another", "Enter the text you see above:", numberOfCaptchaChars, "Is required field")
+    </div>
     if (ViewBag.captchaError != null)
     {
         @ViewBag.captchaError;

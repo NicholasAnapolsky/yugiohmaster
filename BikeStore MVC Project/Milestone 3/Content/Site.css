@@ -115,28 +115,15 @@ footer {
     transition : all 0.3s 0s ease;
 }
 
-.otherlink {
+.otherlink, .captcha a {
     color : #e77;
 }
 
-.otherlink:visited {
+.otherlink:visited, .captcha a:visited {
     color : #b88;
 }
 
-.otherlink:hover {
-    color : #faa;
-}
-
-
-.captcha a {
-    color : #e77;
-}
-
-.captcha a:visited {
-    color : #b88;
-}
-
-.captcha a:hover {
+.otherlink:hover, .captcha a:hover {
     color : #faa;
 }
 
