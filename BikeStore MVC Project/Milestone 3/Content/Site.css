@@ -1,5 +1,4 @@
-﻿
-body {
+﻿body {
     margin: 0;
     background-image: url("~/Content/images/img1.jpg");
     font: 75%/1.75em "Helvetica", Verdana, sans-serif;
@@ -7,6 +6,25 @@ body {
     color : #fcc;
     width: 100%;
 
+}
+
+.login{
+    font-size:10px;
+    float:right;
+    border:1px rgb(140,120,130) solid;
+    padding-bottom:0.5%;
+    margin:1%;
+    background:rgba(100,70,70,1);
+}
+
+.login input{
+    width:70%;
+    font-size:10px;
+}
+
+.login .text-danger, p{
+    padding:0.5%;
+    font-size:10px;
 }
 
 .background-image {
