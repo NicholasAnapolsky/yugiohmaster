@@ -24,14 +24,19 @@
                 @Html.ActionLink(".", "Index", "Home", new { area = "" }, new { @class = "logo" })
                 <hr />
                 <div class="nav-link">
-                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
-                        @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <hr />
+                <div class="login">
+                    @Html.Action("_Login", "Home")
                 </div>
             </div>
         </nav>
+
         <div class="body-content" id="fade">
             @RenderBody()
         </div>

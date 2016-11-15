@@ -21,6 +21,8 @@ namespace MileStone2A.Controllers
                              where x.ParentProductCategoryID == 1
                              select x;
 
+            ViewBag.Products = db.Products;
+
             return View(categories.ToList());
         }
 
