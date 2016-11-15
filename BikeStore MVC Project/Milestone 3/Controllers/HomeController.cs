@@ -103,19 +103,38 @@ namespace Milestone2B.Controllers
             return View();
         }
 
-        public JsonResult ExistingEmail(string Email)
-        {
-            var existingEmail = (from x in db.Managers
-                                 where x.Email == Email
-                                 select x).Count();
-            var result = existingEmail > 0;
-            return Json(result, JsonRequestBehavior.AllowGet);
+        public ActionResult _Login()
+        {            
+            return PartialView(new Managers());
         }
 
-        public ActionResult _Login()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Login(Managers managers)
         {
-            ViewBag.Managers = db.Managers;
-            return View();
+            var managerQuery = from x in db.Managers
+                               where x.Email == managers.Email &&
+                               x.Password == managers.Password
+                               select x;
+            if (managerQuery.Count() > 0)
+            {
+                var dbManagers = managerQuery.First();
+                if (ModelState.IsValid)
+                {
+                    Session["LoggedIn"] = "true";
+                    Session["User"] = dbManagers.FirstName;
+                    return PartialView(dbManagers);
+                }
+            }
+            else
+            {
+                ViewBag.NonExistingManager = true;
+                ViewBag.NonExistingManagerError = "This manager does not exist.";
+            }
+
+            Session["LoggedIn"] = "false";
+
+            return PartialView(managers);
         }
     }
 }

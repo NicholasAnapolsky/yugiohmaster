@@ -15,9 +15,11 @@ namespace Milestone_3.Models
         public string LastName { get; set; }
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [Remote("ExistingEmail", "Home", ErrorMessage = "This Email does not exist, please use an existing one.")]
+        //[Remote("ExistingEmail", "Home", ErrorMessage = "This Email does not exist, please use an existing one.")]
+        [Required]
         public string Email { get; set; }
-        [Remote("ExistingPassword", "Home", ErrorMessage = "This Password does not exist, please use an existing one.")]
+        //[Remote("ExistingPassword", "Home", ErrorMessage = "This Password does not exist, please use an existing one.")]
+        [Required]
         public string Password { get; set; }
     }
 }
