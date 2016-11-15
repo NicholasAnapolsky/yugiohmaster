@@ -116,20 +116,27 @@ namespace Milestone2B.Controllers
                                where x.Email == managers.Email &&
                                x.Password == managers.Password
                                select x;
-            if (managerQuery.Count() > 0)
+            if ((string)Session["LoggedIn"] == "true")
             {
-                var dbManagers = managerQuery.First();
-                if (ModelState.IsValid)
-                {
-                    Session["LoggedIn"] = "true";
-                    Session["User"] = dbManagers.FirstName;
-                    return PartialView(dbManagers);
-                }
+                Session["LoggedIn"] = "false";
             }
             else
             {
-                ViewBag.NonExistingManager = true;
-                ViewBag.NonExistingManagerError = "This manager does not exist.";
+                if (managerQuery.Count() > 0)
+                {
+                    var dbManagers = managerQuery.First();
+                    if (ModelState.IsValid)
+                    {
+                        Session["LoggedIn"] = "true";
+                        Session["User"] = dbManagers.FirstName;
+                        return PartialView(dbManagers);
+                    }
+                }
+                else
+                {
+                    ViewBag.NonExistingManager = true;
+                    ViewBag.NonExistingManagerError = "This manager does not exist.";
+                }
             }
 
             Session["LoggedIn"] = "false";

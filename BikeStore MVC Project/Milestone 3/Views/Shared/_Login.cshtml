@@ -1,14 +1,10 @@
 ﻿@model Milestone_3.Models.Managers
-@{ 
-    var Model = (List<Milestone_3.Models.Managers>)ViewBag.Managers;
-}
 
-@if ((string)Session["LoggedIn"] != "true")
+@using (Html.BeginForm())
 {
-    using (Html.BeginForm())
+    @Html.AntiForgeryToken()
+    if ((string)Session["LoggedIn"] != "true")
     {
-        @Html.AntiForgeryToken()
-
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -41,8 +37,14 @@
             </div>
         </div>
     }
-}
-else
-{
-    <p>@Session["User"] is logged in</p>
+    else
+    {
+        <p>@Session["User"] is logged in</p>
+        <br>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Log Out" class="btn btn-default" />
+            </div>
+        </div>
+    }
 }
