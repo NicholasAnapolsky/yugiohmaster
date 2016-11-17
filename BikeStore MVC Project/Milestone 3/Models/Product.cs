@@ -66,6 +66,8 @@ namespace MileStone2A.Models
         [ScaffoldColumn(false)]
         [Display(Name = "Thumbnail Photo")]
         public byte[] ThumbNailPhoto { get; set; }
+
+        [Display(Name = "Photo")]
         public string ThumbnailPhotoFileName { get; set; }
         public Guid rowguid { get; set; }
 

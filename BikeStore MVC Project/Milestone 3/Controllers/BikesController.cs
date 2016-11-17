@@ -13,7 +13,7 @@ namespace MileStone2A.Controllers
     public class BikesController : Controller
     {
         private BikeDBContext db = new BikeDBContext();
-
+        const int DEFAULT_BIKE_CATEGORY_ID = 5;
         // GET: Bikes
         public ActionResult Index()
         {
@@ -29,6 +29,7 @@ namespace MileStone2A.Controllers
         {
             return View();
         }
+
 
         public ActionResult Mountain()
         {
@@ -71,7 +72,7 @@ namespace MileStone2A.Controllers
         }
 
         // GET: Bikes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string searchString)
         {
             if (id == null)
             {
@@ -80,6 +81,16 @@ namespace MileStone2A.Controllers
             var ProductDescription = from x in db.Products
                                      where x.ProductModelID == id && x.SellEndDate == null
                                      select x;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                ProductDescription = from x in db.Products
+                                     where x.ProductModelID == id && x.Name.Contains(searchString)
+                                     select x;
+                //categories = categories.Where(s => s.Name.Contains(searchString));
+            }
+
+            
 
             if (ProductDescription == null)
             {
