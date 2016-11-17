@@ -315,6 +315,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Bikes\ProductDetails.cshtml" />
+    <Content Include="Views\Gear\Create.cshtml" />
+    <Content Include="Views\Gear\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
