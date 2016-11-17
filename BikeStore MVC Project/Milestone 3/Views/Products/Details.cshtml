@@ -2,14 +2,13 @@
 
 @{
     ViewBag.Title = "Details";
-    var emptyValue = "N/A";
-    var image = Model.ThumbNailPhoto;
 }
 
 <h2>Details</h2>
 
 <div>
     <h4>Product</h4>
+    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ProductCategory.Name)
@@ -17,6 +16,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.ProductCategory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductModel.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductModel.Name)
         </dd>
 
         <dt>
@@ -88,14 +95,7 @@
         </dt>
 
         <dd>
-            @if (Model.SellEndDate == null)
-            {
-                @emptyValue
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.SellEndDate)
-            }
+            @Html.DisplayFor(model => model.SellEndDate)
         </dd>
 
         <dt>
@@ -103,31 +103,24 @@
         </dt>
 
         <dd>
-            @if (Model.DiscontinuedDate == null)
-            {
-                @emptyValue
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.DiscontinuedDate)
-            }
+            @Html.DisplayFor(model => model.DiscontinuedDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ThumbNailPhoto)
+            @Html.DisplayNameFor(model => model.ThumbnailPhotoFileName)
         </dt>
-        @if (Model.ThumbnailPhotoFileName == null)
-        {
-            <dd>
-                No image for this bicycle.
-            </dd>
-        }
-        else
-        {
-            <dd>
-                <img src="data:image/jpg;base64,@(Convert.ToBase64String(image))" />
-            </dd>
-        }
+
+        <dd>
+            @Html.DisplayFor(model => model.ThumbnailPhotoFileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rowguid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rowguid)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.ModifiedDate)
@@ -140,5 +133,6 @@
     </dl>
 </div>
 <p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -213,6 +213,7 @@
     <Compile Include="Controllers\GearController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +314,12 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Gear\ProductDetails.cshtml" />
     <Content Include="Views\Bikes\ProductDetails.cshtml" />
+    <Content Include="Views\BikesManager\Edit.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
