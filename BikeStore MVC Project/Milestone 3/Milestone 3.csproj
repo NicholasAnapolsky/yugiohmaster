@@ -423,6 +423,8 @@
     <Content Include="Views\Gear\ProductDetails.cshtml" />
     <Content Include="Views\Bikes\Delete.cshtml" />
     <Content Include="Views\Gear\Delete.cshtml" />
+    <Content Include="Views\Gear\Success.cshtml" />
+    <Content Include="Views\Bikes\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

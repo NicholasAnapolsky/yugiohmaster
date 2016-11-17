@@ -25,6 +25,10 @@ namespace MileStone2A.Controllers
 
             return View(categories.ToList());
         }
+        public ActionResult Success()
+        {
+            return View();
+        }
 
         public ActionResult Mountain()
         {
@@ -125,7 +129,7 @@ namespace MileStone2A.Controllers
             Product product = db.Products.Find(id);
             product.SellEndDate = DateTime.Now;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Success");
         }
 
         protected override void Dispose(bool disposing)

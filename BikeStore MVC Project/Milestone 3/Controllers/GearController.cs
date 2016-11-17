@@ -22,6 +22,11 @@ namespace Milestone2B.Controllers
                              select x;
             return View(categories.ToList());
         }
+        
+        public ActionResult Success()
+        {
+            return View();
+        }
 
         public ActionResult Components()
         {
@@ -102,7 +107,7 @@ namespace Milestone2B.Controllers
             Product product = db.Products.Find(id);
             product.SellEndDate = DateTime.Now;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Success");
         }
 
         protected override void Dispose(bool disposing)
