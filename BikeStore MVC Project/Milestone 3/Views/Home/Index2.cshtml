@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MileStone2A.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+    var searchString = ViewBag.SearchString;
+
+    var emptyValue = "N/A";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ListPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThumbnailPhotoFileName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.ProductID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ListPrice)
+            </td>
+            <td>
+                @if (item.Size == null)
+                {
+                    @emptyValue
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Size)
+                }
+            </td>
+            @if (item.ThumbnailPhotoFileName == null)
+            {
+                <td>
+                    No image for this bicycle.
+                </td>
+            }
+            else
+            {
+                var image = item.ThumbNailPhoto;
+                <td>
+                    <img src="data:image/jpg;base64,@(Convert.ToBase64String(image))" />
+                </td>
+            }
+        </tr>
+    }
+
+</table>

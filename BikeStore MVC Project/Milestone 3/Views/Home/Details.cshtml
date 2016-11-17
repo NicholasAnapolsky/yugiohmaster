@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    var emptyValue = "N/A";
     var image = Model.ThumbNailPhoto;
 }
 
@@ -43,6 +44,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.StandardCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandardCost)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.ListPrice)
         </dt>
 
@@ -67,6 +76,44 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.SellStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellEndDate)
+        </dt>
+
+        <dd>
+            @if (Model.SellEndDate == null)
+            {
+                @emptyValue
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.SellEndDate)
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscontinuedDate)
+        </dt>
+
+        <dd>
+            @if (Model.DiscontinuedDate == null)
+            {
+                @emptyValue
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.DiscontinuedDate)
+            }
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.ThumbNailPhoto)
         </dt>
         @if (Model.ThumbnailPhotoFileName == null)
@@ -82,8 +129,16 @@
             </dd>
         }
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "otherlink" })
+    @Html.ActionLink("Back to List", "Index")
 </p>
