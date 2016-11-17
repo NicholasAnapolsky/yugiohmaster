@@ -74,7 +74,7 @@ namespace MileStone2A.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var ProductDescription = from x in db.Products
-                                     where x.ProductModelID == id
+                                     where x.ProductModelID == id && x.SellEndDate == null
                                      select x;
 
             if (ProductDescription == null)
@@ -123,7 +123,7 @@ namespace MileStone2A.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            product.SellEndDate = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
