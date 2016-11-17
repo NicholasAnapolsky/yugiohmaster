@@ -26,24 +26,6 @@ namespace MileStone2A.Controllers
             return View(categories.ToList());
         }
 
-        public ActionResult Index2()
-        {
-            var categories = from x in db.Products select x;
- 
-            return View(categories.ToList());
-        }
-
-        [HttpPost]
-        public ActionResult Index2(string SearchString)
-        {
-            var categories = from x in db.Products select x;
-
-            if (!String.IsNullOrEmpty(SearchString))
-            {
-                categories = categories.Where(s => s.Name.Contains(SearchString));
-            }
-            return View(categories.ToList());
-        }
 
         public ActionResult Mountain()
         {

@@ -33,7 +33,7 @@
                     @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                     @using (Html.BeginForm("Index2", "Home"))
-                    {@Html.TextBox("SearchString") <input type="submit" value="Search" />}
+                    {@Html.AntiForgeryToken(); @Html.TextBox("SearchString") <input type="submit" value="Search" />}
                 </div>
                 <hr />
                 <div class="login">

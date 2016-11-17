@@ -1,21 +1,13 @@
 ﻿@model IEnumerable<MileStone2A.Models.Product>
 
 @{
-    ViewBag.Title = "Index2";
+    ViewBag.Title = "Products";
     var searchString = ViewBag.SearchString;
 
     var emptyValue = "N/A";
 }
 
-<h2>Index2</h2>
-@using (Html.BeginForm())
-{
-    <p>
-        Title: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
-}
-
+<h2>@ViewBag.Title</h2>
 
 <table class="table">
     <tr>
@@ -23,28 +15,10 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StandardCost)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.ListPrice)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellStartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SellEndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiscontinuedDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ThumbnailPhotoFileName)
@@ -58,12 +32,6 @@
                 @Html.ActionLink(item.Name, "Details", new { id = item.ProductID })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StandardCost)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ListPrice)
             </td>
             <td>
@@ -74,39 +42,6 @@
                 else
                 {
                     @Html.DisplayFor(modelItem => item.Size)
-                }
-            </td>
-            <td>
-                @if (item.Weight == null)
-                {
-                    @emptyValue
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.Weight)
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellStartDate)
-            </td>
-            <td>
-                @if (item.SellEndDate == null)
-                {
-                    @emptyValue
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.SellEndDate)
-                }
-            </td>
-            <td>
-                @if (item.DiscontinuedDate == null)
-                {
-                    @emptyValue
-                }
-                else
-                {
-                    @Html.DisplayFor(modelItem => item.DiscontinuedDate)
                 }
             </td>
             @if (item.ThumbnailPhotoFileName == null)

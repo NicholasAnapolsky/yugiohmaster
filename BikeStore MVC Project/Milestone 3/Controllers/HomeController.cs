@@ -39,6 +39,7 @@ namespace Milestone2B.Controllers
             return View(categories.ToList());
         }
 
+
         public ActionResult Details(int? id)
         {
             if (id == null)
