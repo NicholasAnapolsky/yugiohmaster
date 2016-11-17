@@ -11,13 +11,14 @@ namespace Milestone_3.Models
     [Table("SalesLT.ProductModel")]
     public class ProductModel
     {
+        [Key]
         public int ProductModelID { get; set; }
         [Required]
         public string Name { get; set; }
         public string CatalogDescription { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }
 /*

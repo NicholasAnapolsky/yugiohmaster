@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MileStone2A.Models;
+using Milestone_3.Models;
 
 namespace Milestone_3.Controllers
 {
@@ -33,16 +34,13 @@ namespace Milestone_3.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var productWithDescription = (from x in db.ProductAndDescription
-                                         where x.Culture == "en" && x.ProductModelTable.Product.ProductID == id
-                                         select x).First();
-
-            //Product product = db.Products.Find(id);
-            if (productWithDescription == null)
+            Product product = db.Products.Find(id);
+            
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(productWithDescription);
+            return View(product);
         }
         /*
         // GET: BikesManager/Create
