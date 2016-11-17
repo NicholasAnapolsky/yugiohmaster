@@ -58,6 +58,7 @@ namespace Milestone_3.Controllers
 
         public ActionResult Create()
         {
+            
             var BikeCategories = from x in db.ProductCategories
                                  where x.ParentProductCategoryID == 1
                                  select x;
@@ -73,7 +74,10 @@ namespace Milestone_3.Controllers
                                  Text = x.ProductModel.Name
                              }).Distinct();
             ViewBag.ProductModelID = BikeModels;
-
+            if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -82,10 +86,13 @@ namespace Milestone_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product, HttpPostedFileBase picture)
         {
+            product.ThumbNailPhoto = new byte[picture.ContentLength];
             if (ModelState.IsValid)
             {
+                picture.InputStream.Read(product.ThumbNailPhoto, 0, picture.ContentLength);
+                product.ThumbnailPhotoFileName = picture.FileName;
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
                 db.Products.Add(product);

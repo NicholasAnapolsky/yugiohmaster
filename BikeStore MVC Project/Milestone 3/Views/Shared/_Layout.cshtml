@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
     <script src="~/Content/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/jquery.custom-file-input.js"></script>
     <title>@ViewBag.Title - Bikes 'R' Us</title>
     @Scripts.Render("~/bundles/modernizr")
     <script type='text/javascript'>
@@ -27,7 +28,11 @@
                     @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" })
+                    @if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
+                    {
+                        Html.Raw("");
+                    }
+                    else { @Html.ActionLink("Create", "Create", "BikesManager", new { area = "" }, new { @class = "navbar-brand" }); }
                     @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <hr />
