@@ -25,6 +25,10 @@ namespace MileStone2A.Controllers
 
             return View(categories.ToList());
         }
+        public ActionResult Success()
+        {
+            return View();
+        }
 
 
         public ActionResult Mountain()
@@ -75,7 +79,7 @@ namespace MileStone2A.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var ProductDescription = from x in db.Products
-                                     where x.ProductModelID == id
+                                     where x.ProductModelID == id && x.SellEndDate == null
                                      select x;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -111,6 +115,41 @@ namespace MileStone2A.Controllers
             }
 
             return View(product);
+        }
+        
+        // GET: Bikes/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        // POST: Bikes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Product product = db.Products.Find(id);
+            product.SellEndDate = DateTime.Now;
+            db.SaveChanges();
+            return RedirectToAction("Success");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }

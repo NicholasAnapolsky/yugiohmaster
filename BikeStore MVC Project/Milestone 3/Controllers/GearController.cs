@@ -22,6 +22,11 @@ namespace Milestone2B.Controllers
                              select x;
             return View(categories.ToList());
         }
+        
+        public ActionResult Success()
+        {
+            return View();
+        }
 
         public ActionResult Components()
         {
@@ -77,6 +82,41 @@ namespace Milestone2B.Controllers
                 return HttpNotFound();
             }
             return View(product);
+        }
+
+        // GET: Gears/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        // POST: Gears/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Product product = db.Products.Find(id);
+            product.SellEndDate = DateTime.Now;
+            db.SaveChanges();
+            return RedirectToAction("Success");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
