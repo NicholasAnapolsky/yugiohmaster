@@ -313,7 +313,6 @@
     <Content Include="Views\BikesManager\Index.cshtml" />
     <Content Include="Views\Home\ContactResult.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Bikes\Index2.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Bikes\ProductDetails.cshtml" />
