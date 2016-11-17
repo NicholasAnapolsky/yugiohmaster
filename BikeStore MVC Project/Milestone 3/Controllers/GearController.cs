@@ -84,6 +84,41 @@ namespace Milestone2B.Controllers
             return View(product);
         }
 
+
+        public ActionResult Create()
+        {
+            var gearCategories = from x in db.ProductCategories
+                       where x.ProductCategoryID == 2 ||
+                        x.ProductCategoryID == 3 || x.ProductCategoryID == 4
+                       select x;
+            ViewBag.ProductCategoryID = new SelectList(gearCategories, "ProductCategoryID", "Name", 2);
+
+            var gearModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID == 2 ||
+                              x.ProductCategory.ParentProductCategoryID == 3 ||
+                              x.ProductCategory.ParentProductCategoryID == 4
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductModel.ProductModelID.ToString(),
+                                  Text = x.ProductModel.Name
+                              }).Distinct();
+            ViewBag.ProductModelID = gearModels;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetProductModelsByCategory(int BikeCategory)
+        {
+            var gearModels = (from x in db.ProductCategories
+                              where x.ParentProductCategoryID == BikeCategory
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductCategoryID.ToString(),
+                                  Text = x.Name
+                              }).Distinct();
+            return Json(gearModels);
+        }
         // GET: Gears/Delete/5
         public ActionResult Delete(int? id)
         {

@@ -153,6 +153,8 @@ namespace Milestone2B.Controllers
             if ((string)Session["LoggedIn"] == "true")
             {
                 Session["LoggedIn"] = "false";
+                Session.Clear();
+                return View();
             }
             else
             {
