@@ -72,6 +72,8 @@ namespace MileStone2A.Models
 
         [Display(Name = "Photo")]
         public string ThumbnailPhotoFileName { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public Guid rowguid { get; set; }
 
         [Display(Name = "Modified Date")]
@@ -80,7 +82,6 @@ namespace MileStone2A.Models
 
         public virtual ProductCategory ProductCategory { get; set; }
 
-        [Required]
         public virtual ProductModel ProductModel { get; set; }
     }
 }

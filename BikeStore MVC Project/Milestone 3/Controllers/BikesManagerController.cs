@@ -69,6 +69,7 @@ namespace Milestone_3.Controllers
         {
             if (ModelState.IsValid)
             {
+                product.ModifiedDate = DateTime.Now;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,10 +97,12 @@ namespace Milestone_3.Controllers
                                  Text = x.ProductModel.Name
                              }).Distinct();
             ViewBag.ProductModelID = BikeModels;
+            /*
             if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
             {
                 return RedirectToAction("Index", "Home");
             }
+            */
             return View();
         }
 

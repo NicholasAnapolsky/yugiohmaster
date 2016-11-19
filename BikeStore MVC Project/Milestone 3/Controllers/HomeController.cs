@@ -154,7 +154,7 @@ namespace Milestone2B.Controllers
             {
                 Session["LoggedIn"] = "false";
                 Session.Clear();
-                return View();
+                return PartialView();
             }
             else
             {
