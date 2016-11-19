@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MileStone2A.Models;
+using Milestone_3.Models;
 
 namespace Milestone_3.Controllers
 {
@@ -32,29 +33,50 @@ namespace Milestone_3.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Product product = db.Products.Find(id);
+            
             if (product == null)
             {
                 return HttpNotFound();
             }
             return View(product);
         }
-        /*
-        // GET: BikesManager/Create
-        public ActionResult Create()
-        {
-            var BikeCategories = from x in db.ProductCategories
-                                      where x.ParentProductCategoryID == 1
-                                      select x;
-            ViewBag.ProductCategoryID = new SelectList(BikeCategories, "ProductCategoryID", "Name");
 
-            var BikeModels = from x in db.Products
-                             where x.ProductCategory.ParentProductCategoryID == 1
-                             select x.ProductModel;
-            ViewBag.ProductModelID = new SelectList(BikeModels, "ProductModelID", "Name");
-            return View();
+        // GET: Products/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "Name", product.ProductCategoryID);
+            ViewBag.ProductModelID = new SelectList(db.ProductModel, "ProductModelID", "Name", product.ProductModelID);
+            return View(product);
         }
-        */
+
+        // POST: Products/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,rowguid,ModifiedDate")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "Name", product.ProductCategoryID);
+            ViewBag.ProductModelID = new SelectList(db.ProductModel, "ProductModelID", "Name", product.ProductModelID);
+            return View(product);
+        }
 
         public ActionResult Create()
         {

@@ -44,8 +44,11 @@ namespace MileStone2A.Models
         public decimal? Weight { get; set; }
 
         [Display(Name = "Product Category")]
+        [ForeignKey("ProductCategory")]
         public int ProductCategoryID { get; set; }
+
         [Display(Name = "Product Model")]
+        [ForeignKey("ProductModel")]
         public int ProductModelID { get; set; }
 
         [Display(Name = "Sell Start Date")]
@@ -76,6 +79,8 @@ namespace MileStone2A.Models
         public DateTime ModifiedDate { get; set; }
 
         public virtual ProductCategory ProductCategory { get; set; }
+
+        [Required]
         public virtual ProductModel ProductModel { get; set; }
     }
 }
