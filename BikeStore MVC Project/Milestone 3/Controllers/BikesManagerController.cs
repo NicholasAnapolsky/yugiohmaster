@@ -19,6 +19,11 @@ namespace Milestone_3.Controllers
         // GET: BikesManager
         public ActionResult Index()
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var products = from x in db.Products.Include(p => p.ProductCategory).Include(p => p.ProductModel)
                            where x.ProductCategory.ParentProductCategoryID == 1
                            select x;
@@ -29,6 +34,11 @@ namespace Milestone_3.Controllers
         // GET: BikesManager/Details/5
         public ActionResult Details(int? id)
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -46,6 +56,11 @@ namespace Milestone_3.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -67,8 +82,14 @@ namespace Milestone_3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,rowguid,ModifiedDate")] Product product)
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (ModelState.IsValid)
             {
+                product.ModifiedDate = DateTime.Now;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,7 +101,11 @@ namespace Milestone_3.Controllers
 
         public ActionResult Create()
         {
-            
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var BikeCategories = from x in db.ProductCategories
                                  where x.ParentProductCategoryID == 1
                                  select x;
@@ -96,10 +121,7 @@ namespace Milestone_3.Controllers
                                  Text = x.ProductModel.Name
                              }).Distinct();
             ViewBag.ProductModelID = BikeModels;
-            if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
+
             return View();
         }
 
@@ -110,6 +132,11 @@ namespace Milestone_3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product, HttpPostedFileBase picture)
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             product.ThumbNailPhoto = new byte[picture.ContentLength];
             if (ModelState.IsValid)
             {
@@ -174,6 +201,11 @@ namespace Milestone_3.Controllers
                                  select x).Count();
             var result = existingNames < MORE_THAN_1_NAME;
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool IsLoggedIn()
+        {
+            return Session.Count == 0 || Session["Loggedin"].Equals("false");
         }
     }
 }

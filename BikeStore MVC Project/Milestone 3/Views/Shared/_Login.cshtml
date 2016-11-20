@@ -1,50 +1,74 @@
 ﻿@model Milestone_3.Models.Managers
 
-@using (Html.BeginForm())
+<script>
+    function login() {
+        var Email = document.getElementById("Email").value;
+        var Password = document.getElementById("Password").value;
+
+        $.post('@Url.Action("ManageLogin", "Home")',
+            { "Email": Email, "Password": Password}, ManageLogin);
+    }
+
+    function logout() {
+        $.post('@Url.Action("ManageLogin", "Home")',
+            { "Email": "", "Password": "" }, ManageLogin);
+    }
+
+    //Create HTML for a dropdown for product model using the selected bike category as a filter
+    function ManageLogin(data) {
+        var ManagerModel = data.ManagerModel;
+
+        if (data.Status == "OK") {
+            if (ManagerModel != null)
+                Model = ManagerModel;
+            location.reload();
+        } else {
+            alert("An unexpected error has occured!");
+        }
+    }
+</script>
+
+@if ((string)Session["LoggedIn"] != "true")
 {
-    @Html.AntiForgeryToken()
-    if ((string)Session["LoggedIn"] != "true")
-    {
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { @class = "control-label col-md-2" })
-                    <br>
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { @class = "control-label col-md-2", @id = "Email" })
+                <br>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.Password, new { @class = "control-label col-md-2" })
-                    <br>
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            @if(ViewBag.NonExistingManager == true)
-            {
-                <p class="text-danger">@ViewBag.NonExistingManagerError</p>
-            }
         </div>
+
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Log In" class="btn btn-default" />
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password, new { @class = "control-label col-md-2", @id = "Password" })
+                <br>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
-    }
-    else
-    {
-        <p>@Session["User"] is logged in</p>
-        <br>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Log Out" class="btn btn-default" />
-            </div>
+        @if(Session["LoginError"] != null)
+        {
+            <p class="text-danger">@Session["LoginError"]</p>
+        }
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Log In" class="btn btn-default" onclick="login()" />
         </div>
-    }
+    </div>
+}
+else
+{
+    <p>@Session["User"] is logged in</p>
+    <br>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Log Out" class="btn btn-default" onclick="logout()" />
+        </div>
+    </div>
 }
