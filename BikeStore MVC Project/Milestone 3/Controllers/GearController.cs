@@ -55,6 +55,7 @@ namespace Milestone2B.Controllers
         // GET: Gear/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -72,6 +73,7 @@ namespace Milestone2B.Controllers
         // GET: Bikes/ProductDetails/5
         public ActionResult ProductDetails(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +89,11 @@ namespace Milestone2B.Controllers
 
         public ActionResult Create()
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var gearCategories = (from x in db.ProductCategories
                        where x.ProductCategoryID == 2 ||
                         x.ProductCategoryID == 3 || x.ProductCategoryID == 4
@@ -117,7 +124,7 @@ namespace Milestone2B.Controllers
         {
             if (IsLoggedIn())
             {
-                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             if (ModelState.IsValid && picture != null)
@@ -177,6 +184,10 @@ namespace Milestone2B.Controllers
         // GET: Gears/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
