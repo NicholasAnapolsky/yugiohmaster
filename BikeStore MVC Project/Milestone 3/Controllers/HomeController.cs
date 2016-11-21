@@ -19,6 +19,10 @@ namespace Milestone2B.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
 
         public ActionResult Index2()
         {
