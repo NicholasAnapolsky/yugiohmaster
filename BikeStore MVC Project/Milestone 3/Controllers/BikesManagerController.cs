@@ -137,11 +137,20 @@ namespace Milestone_3.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            product.ThumbNailPhoto = new byte[picture.ContentLength];
-            if (ModelState.IsValid)
+            
+            if (ModelState.IsValid && picture != null)
             {
+                product.ThumbNailPhoto = new byte[picture.ContentLength];
                 picture.InputStream.Read(product.ThumbNailPhoto, 0, picture.ContentLength);
                 product.ThumbnailPhotoFileName = picture.FileName;
+                product.ModifiedDate = DateTime.Now;
+                product.rowguid = Guid.NewGuid();
+                db.Products.Add(product);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
                 db.Products.Add(product);
