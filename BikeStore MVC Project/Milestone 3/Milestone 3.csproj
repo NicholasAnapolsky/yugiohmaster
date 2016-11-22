@@ -234,12 +234,12 @@
   <ItemGroup>
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
-    <Content Include="Content\images\bikeGear.jpg" />
-    <Content Include="Content\images\bikeRace.jpg" />
+    <Content Include="Content\images\HomePictures\bikeGear.jpg" />
+    <Content Include="Content\images\HomePictures\bikeRace.jpg" />
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\img2.jpg" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\mountainBike.jpg" />
+    <Content Include="Content\images\HomePictures\mountainBike.jpg" />
     <Content Include="Content\jquery-3.1.1.min.js" />
     <Content Include="Content\site.css" />
     <Content Include="Content\gj.jpg" />

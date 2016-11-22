@@ -17,19 +17,19 @@
 
     <div class="mySlides fade">
         <div class="numbertext">1 / 3</div>
-        <img src="~/Content/images/bikeGear.jpg" style="width:100%">
+        <img src="~/Content/images/HomePictures/bikeGear.jpg" style="width:100%">
         <div class="text"></div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">2 / 3</div>
-        <img src="~/Content/images/mountainBike.jpg" style="width:100%">
+        <img src="~/Content/images/HomePictures/mountainBike.jpg" style="width:100%">
         <div class="text"></div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">3 / 3</div>
-        <img src="~/Content/images/bikeRace.jpg" style="width:100%">
+        <img src="~/Content/images/HomePictures/bikeRace.jpg" style="width:100%">
         <div class="text"></div>
     </div>
 
@@ -46,7 +46,7 @@
 </div>
 
 <script>
-
+/*
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -72,17 +72,20 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
-}
-    /*
+}*/
+    
     'use strict';
     var slideIndex = 1;
+    var mytimer = setTimeout(showSlides, 5000);
     //window.onload = showSlides(slideIndex);
     plusSlides(0);
     function plusSlides(n) {
+        clearTimeout(mytimer);
         showSlides(slideIndex += n);
     }
 
     function currentSlide(n) {
+        clearTimeout(mytimer);
         showSlides(slideIndex = n);
     }
 
@@ -102,9 +105,9 @@ function showSlides(n) {
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-
-        setTimeout(showSlides, 5000); // Change image every 5 seconds
-    }*/
+        mytimer = setTimeout(showSlides, 5000);
+        //setTimeout(showSlides, 5000); // Change image every 5 seconds
+    }
 </script>
 
 @section Scripts {
