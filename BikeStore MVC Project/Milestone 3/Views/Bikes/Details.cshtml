@@ -46,7 +46,13 @@
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "otherlink" })
+                @if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
+                {
+                    Html.Raw("");
+                }
+                else
+                { @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "otherlink" });
+                }                
             </td>
         </tr>
     }
