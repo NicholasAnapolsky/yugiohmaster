@@ -1,3 +1,4 @@
+using Milestone_3.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,8 @@ namespace MileStone2A.Models
         public string Culture { get; set; }
         public string Description { get; set; }
         public int ProductCategoryID { get; set; }
+
+        public virtual ProductModel ProductModelTable { get; set; }
     }
 /*
     p.[ProductModelID] 

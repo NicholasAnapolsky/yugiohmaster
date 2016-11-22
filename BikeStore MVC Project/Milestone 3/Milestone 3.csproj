@@ -213,6 +213,7 @@
     <Compile Include="Controllers\GearController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +235,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AdventureWorksLT2012_Data.mdf" />
+    <Content Include="App_Data\AdventureWorksLT2012_Data_log.ldf">
+      <DependentUpon>AdventureWorksLT2012_Data.mdf</DependentUpon>
+    </Content>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\CaptchaMvc.dll" />
@@ -336,9 +341,12 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
+    <Content Include="Content\images\bikeGear.jpg" />
+    <Content Include="Content\images\bikeRace.jpg" />
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\img2.jpg" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\mountainBike.jpg" />
     <Content Include="Content\jquery-3.1.1.min.js" />
     <Content Include="Content\site.css" />
     <Content Include="Content\gj.jpg" />
@@ -419,14 +427,24 @@
     <Content Include="Views\Home\ContactResult.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
-    <Content Include="Views\Bikes\ProductDetails.cshtml" />
     <Content Include="Views\Gear\ProductDetails.cshtml" />
-    <Content Include="Views\Bikes\Delete.cshtml" />
+    <Content Include="Views\Bikes\ProductDetails.cshtml" />
+    <Content Include="Views\BikesManager\Edit.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Gear\Create.cshtml" />
     <Content Include="Views\Gear\Delete.cshtml" />
+    <Content Include="Views\Gear\Success.cshtml" />
+    <Content Include="Views\Bikes\Delete.cshtml" />
+    <Content Include="Views\Bikes\Success.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

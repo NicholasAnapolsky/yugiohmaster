@@ -44,8 +44,11 @@ namespace MileStone2A.Models
         public decimal? Weight { get; set; }
 
         [Display(Name = "Product Category")]
+        [ForeignKey("ProductCategory")]
         public int ProductCategoryID { get; set; }
+
         [Display(Name = "Product Model")]
+        [ForeignKey("ProductModel")]
         public int ProductModelID { get; set; }
 
         [Display(Name = "Sell Start Date")]
@@ -66,7 +69,11 @@ namespace MileStone2A.Models
         [ScaffoldColumn(false)]
         [Display(Name = "Thumbnail Photo")]
         public byte[] ThumbNailPhoto { get; set; }
+
+        [Display(Name = "Photo")]
         public string ThumbnailPhotoFileName { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public Guid rowguid { get; set; }
 
         [Display(Name = "Modified Date")]
@@ -74,6 +81,7 @@ namespace MileStone2A.Models
         public DateTime ModifiedDate { get; set; }
 
         public virtual ProductCategory ProductCategory { get; set; }
+
         public virtual ProductModel ProductModel { get; set; }
     }
 }

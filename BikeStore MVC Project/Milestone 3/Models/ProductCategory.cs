@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using Milestone_3.Models;
+using Milestone2B.Models;
 
 namespace MileStone2A.Models
 {

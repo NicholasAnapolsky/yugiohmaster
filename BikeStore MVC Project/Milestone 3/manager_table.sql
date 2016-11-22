@@ -12,3 +12,5 @@ values
 ('Mister', 'Blister', 'email@jim.com', 'totallynotsecure'),
 ('Mister', 'Sister', 'john@bill.com', 'toadallynotawesome'),
 ('Yugo', 'Buster', 'dak@bak.com', 'one');
+
+INSERT INTO SalesLT.ProductModel (Name,[rowguid], [ModifiedDate] ) VALUES ('Custom', NEWID(), GETDATE());

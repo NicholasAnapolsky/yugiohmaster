@@ -19,6 +19,44 @@ namespace Milestone2B.Controllers
         {
             return View();
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        public ActionResult Index2()
+        {
+            var categories = from x in db.Products select x;
+
+            return View(categories.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index2(string SearchString)
+        {
+            var categories = from x in db.Products select x;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                categories = categories.Where(s => s.Name.Contains(SearchString));
+            }
+            return View(categories.ToList());
+        }
+
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
 
         public ActionResult Contact()
         {
@@ -109,16 +147,17 @@ namespace Milestone2B.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult _Login(Managers managers)
+        public ActionResult ManageLogin(string Email, string Password)
         {
             var managerQuery = from x in db.Managers
-                               where x.Email == managers.Email &&
-                               x.Password == managers.Password
+                               where x.Email == Email &&
+                               x.Password == Password
                                select x;
             if ((string)Session["LoggedIn"] == "true")
             {
                 Session["LoggedIn"] = "false";
+                Session.Clear();
+                return Json(new { ManagerModel = new Managers(), Status = "OK", Error = "" });
             }
             else
             {
@@ -129,19 +168,18 @@ namespace Milestone2B.Controllers
                     {
                         Session["LoggedIn"] = "true";
                         Session["User"] = dbManagers.FirstName;
-                        return PartialView(dbManagers);
+                        return Json(new { ManagerModel = dbManagers, Status = "OK", Error = "" });
                     }
                 }
                 else
                 {
-                    ViewBag.NonExistingManager = true;
-                    ViewBag.NonExistingManagerError = "This manager does not exist.";
+                    Session["LoginError"] = "This manager does not exist.";
                 }
             }
 
             Session["LoggedIn"] = "false";
 
-            return PartialView(managers);
+            return Json(new { ManagerModel = new Managers(), Status = "OK", Error = "" });
         }
     }
 }
