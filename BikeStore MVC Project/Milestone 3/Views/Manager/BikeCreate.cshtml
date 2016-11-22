@@ -18,7 +18,7 @@
             var bikeCategoryID = category.options[category.selectedIndex].value;
             //window.location = URL + bikeCategory;
 
-            $.post('@Url.Action("GetProductModelsByCategory", "BikesManager")',
+            $.post('@Url.Action("GetProductModelsByCategory", "Manager")',
                 {"BikeCategory": bikeCategoryID}, ChangeModelByCategory);
         }
 
@@ -42,7 +42,7 @@
     </script>
 </head>
 
-@using (Html.BeginForm("Create", "BikesManager", FormMethod.Post, new { enctype="multipart/form-data"}))
+@using (Html.BeginForm("BikeCreate", "Manager", FormMethod.Post, new { enctype="multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
     
@@ -159,8 +159,10 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index", new { @class = "list-brand" })
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10" style="margin-top:2%;">
+        @Html.ActionLink("Back to List", "BikeIndex", "Manager", new { @class = "navbar-brand" })
+    </div>
 </div>
 
 @section Scripts {
