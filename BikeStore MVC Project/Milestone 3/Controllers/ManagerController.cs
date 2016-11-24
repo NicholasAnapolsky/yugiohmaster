@@ -114,9 +114,9 @@ namespace Milestone_3.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.SetModelValue("SellStartDate", new ValueProviderResult(product.SellStartDate.ToString(), product.SellStartDate.ToString(), CultureInfo.InvariantCulture));
-            if (ModelState.ContainsKey("SellStartDate"))
-                ModelState["SellStartDate"].Errors.Clear();
+            var OrgSellStartDate = (from x in db.Products
+                                   where x.ProductID == product.ProductID
+                                   select x.SellStartDate).First();
 
             if (ModelState.IsValid && picture != null)
             {
@@ -125,6 +125,7 @@ namespace Milestone_3.Controllers
                 product.ThumbnailPhotoFileName = picture.FileName;
 
                 product.ModifiedDate = DateTime.Now;
+                product.SellStartDate = OrgSellStartDate;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -132,6 +133,7 @@ namespace Milestone_3.Controllers
             else if (ModelState.IsValid)
             {
                 product.ModifiedDate = DateTime.Now;
+                product.SellStartDate = OrgSellStartDate;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
