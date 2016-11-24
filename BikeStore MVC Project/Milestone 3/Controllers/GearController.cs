@@ -127,11 +127,9 @@ namespace Milestone2B.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (ModelState.IsValid && picture != null)
+            if (ModelState.IsValid && picture == null)
             {
-                product.ThumbNailPhoto = new byte[picture.ContentLength];
-                picture.InputStream.Read(product.ThumbNailPhoto, 0, picture.ContentLength);
-                product.ThumbnailPhotoFileName = picture.FileName;
+                
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
                 product.ProductCategoryID = product.ProductModelID;
@@ -140,8 +138,11 @@ namespace Milestone2B.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else
+            else if (ModelState.IsValid && picture != null)
             {
+                product.ThumbNailPhoto = new byte[picture.ContentLength];
+                picture.InputStream.Read(product.ThumbNailPhoto, 0, picture.ContentLength);
+                product.ThumbnailPhotoFileName = picture.FileName;
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
                 product.ProductCategoryID = product.ProductModelID;
@@ -222,7 +223,7 @@ namespace Milestone2B.Controllers
 
         public bool IsLoggedIn()
         {
-            return Session.Count == 0 || Session["Loggedin"].Equals("false");
+            return Session.Count == 0 || Session["LoggedIn"].Equals("false");
         }
     }
 }
