@@ -3,9 +3,86 @@
 }
 
 <h2>We Sell Only Our Quality Brands, at Low Prices!</h2>
-<p>If you came for a great variety of bikes made by us alone<br>
+<p>
+    If you came for a great variety of bikes made by us alone<br>
     you came to the right place! <strong>Bikes 'R' Us</strong> brings you<br>
     the smooth ride that you desire, at a competitively low<br>
     price to boot. So if you desire that perfect bike <br>
     we can deliver, with a variety of models you will not <br>
-    find anywhere else!</p>
+    find anywhere else!
+</p>
+
+
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="~/Content/images/HomePictures/bikeGear.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="~/Content/images/HomePictures/mountainBike.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="~/Content/images/HomePictures/bikeRace.jpg" style="width:100%">
+        <div class="text"></div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<script>
+    
+    'use strict';
+    var slideIndex = 1;
+    var mytimer = setTimeout(showSlides, 5000);
+    //window.onload = showSlides(slideIndex);
+    plusSlides(0);
+    function plusSlides(n) {
+        clearTimeout(mytimer);
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        clearTimeout(mytimer);
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        //alert('showslides('+ n +')\nslideIndex='+slideIndex);
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n == undefined) { n = ++slideIndex }
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        mytimer = setTimeout(showSlides, 5000);
+        //setTimeout(showSlides, 5000); // Change image every 5 seconds
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
