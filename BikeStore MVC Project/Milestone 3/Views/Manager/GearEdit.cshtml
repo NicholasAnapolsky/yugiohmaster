@@ -4,6 +4,42 @@
     ViewBag.Title = "Edit";
 }
 
+<head>
+    <script type="text/javascript">
+        var URL = "Create";
+        $('picture').on('click', function () {
+            $(this).setAttribute("class", "active");
+        });
+
+        function changeCatagory() {
+            var category = document.getElementById("bikelist");
+            var bikeCategoryID = category.options[category.selectedIndex].value;
+            //window.location = URL + bikeCategory;
+
+            $.post('@Url.Action("GetProductModelsByCategory", "Manager")',
+                {"BikeCategory": bikeCategoryID}, ChangeModelByCategory);
+        }
+
+        //Create HTML for a dropdown for product model using the selected bike category as a filter
+        function ChangeModelByCategory(data) {
+            var newModelDropDown = "";
+            var modelDropdown = data.BikeModelDropDown;
+
+            if (data.Status == "OK") {
+                newModelDropDown += "<select class='form-control' id='ProductModelID' name='ProductModelID'>\n";
+                for (var i = 0; i < modelDropdown.length; i++) {
+                    newModelDropDown += "<option value=" + modelDropdown[i].Value + ">" + modelDropdown[i].Text + "</option>\n"
+                }
+                newModelDropDown += "</select>\n";
+
+                document.getElementById("modellist").innerHTML = newModelDropDown;
+            } else {
+                alert("An unexpected error has occured!");
+            }
+        }
+    </script>
+</head>
+
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
@@ -73,6 +109,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.SellEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SellEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SellEndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.ProductCategoryID, "ProductCategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control" })
@@ -93,6 +137,12 @@
             <input type="file" name="picture" id="picture" class="upload" />
             @Html.ValidationMessageFor(model => model.ThumbNailPhoto, "", new { @class = "text-danger" })
         </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.HiddenFor(model => model.SellStartDate, new { htmlAttributes = new { @class = "form-control", @Value = Model.SellStartDate } })
+            </div>
+        </div> 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

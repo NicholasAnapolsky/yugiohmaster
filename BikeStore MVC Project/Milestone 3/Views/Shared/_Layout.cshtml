@@ -35,7 +35,7 @@
                     {
                         Html.Raw("");
                     }
-                    else { @Html.ActionLink("Create", "Create", "Home", new { area = "" }, new { @class = "navbar-brand" }); }
+                    else { @Html.ActionLink("Manage Products", "Index", "Manager", new { area = "" }, new { @class = "navbar-brand" }); }
                     @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                     @using (Html.BeginForm("Index2", "Home"))
