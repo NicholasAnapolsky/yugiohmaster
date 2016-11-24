@@ -50,8 +50,13 @@
 
         <div class="body-content" id="fade">
             @RenderBody()
+            
         </div>
-        <footer><p>@DateTime.Now.Year - &copy; Bikes 'R' Us'</p></footer>
+        <footer><a class="social facebook" href="https://www.facebook.com/pg/TheRealBikesRUs/reviews/"></a>
+                <a class="social twitter" href="https://twitter.com/TheRealBikesRUs"></a>
+                <label>@DateTime.Now.Year - &copy; Bikes 'R' Us'</label>
+            
+        </footer>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
