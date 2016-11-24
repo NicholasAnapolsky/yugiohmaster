@@ -1,0 +1,32 @@
+Milestone 5 File Organization
+
+├── Bikes
+│   ├── Details
+│   ├── Index
+│   ├── Mountain
+│   ├── ProductDetails
+│   ├── Road
+│   └── Touring
+├── Gear
+│   ├── Accessories
+│   ├── Clothing
+│   ├── Components
+│   ├── Details
+│   ├── Index
+│   └── ProductDetails
+├── Home
+│   ├── About
+│   ├── Contact
+│   ├── ContactResult
+│   ├── Index
+│   └── Index2
+└── Manager
+    ├── BikeEdit
+    ├── BikeIndex
+    ├── CreateBike
+    ├── CreateGear
+    ├── Details
+    ├── GearEdit
+    ├── GearIndex
+    ├── Index
+    └── Success
