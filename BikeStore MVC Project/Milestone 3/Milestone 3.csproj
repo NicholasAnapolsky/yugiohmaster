@@ -234,6 +234,17 @@
   <ItemGroup>
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
+    <Content Include="Content\images\BikePictures\mountainBike1.jpg" />
+    <Content Include="Content\images\BikePictures\mountainBike2.jpg" />
+    <Content Include="Content\images\BikePictures\roadBike1.jpg" />
+    <Content Include="Content\images\BikePictures\roadBike2.jpg" />
+    <Content Include="Content\images\BikePictures\urbanBike1.jpg" />
+    <Content Include="Content\images\BikePictures\urbanBike2.jpg" />
+    <Content Include="Content\images\GearPictures\bikewheel.jpg" />
+    <Content Include="Content\images\GearPictures\biking-equipment.jpg" />
+    <Content Include="Content\images\GearPictures\gearJerseyFemale.jpg" />
+    <Content Include="Content\images\GearPictures\gearJerseys2.jpg" />
+    <Content Include="Content\images\GearPictures\socks.jpg" />
     <Content Include="Content\images\HomePictures\bikeGear.jpg" />
     <Content Include="Content\images\HomePictures\bikeRace.jpg" />
     <Content Include="Content\images\img1.jpg" />
