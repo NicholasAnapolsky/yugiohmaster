@@ -46,4 +46,5 @@
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "otherlink" })
+    @Html.ActionLink("Write a review for this Product", "AddReview", "Reviews",new { id = Model.ProductID }, new { @class = "otherlink" })
 </p>
