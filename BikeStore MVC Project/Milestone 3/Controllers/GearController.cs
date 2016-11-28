@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MileStone2A.Models;
+using Milestone_3.Models;
 
 namespace Milestone2B.Controllers
 {
