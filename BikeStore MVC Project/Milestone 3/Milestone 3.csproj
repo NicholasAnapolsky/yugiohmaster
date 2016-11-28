@@ -214,6 +214,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +228,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\Reviews.cs" />
     <Compile Include="Models\vProductAndDescription2.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -443,6 +445,8 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Reviews\AddReview.cshtml" />
+    <Content Include="Views\Reviews\ReviewSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
