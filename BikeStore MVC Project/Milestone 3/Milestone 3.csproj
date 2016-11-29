@@ -448,15 +448,11 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Gear\Create.cshtml" />
-    <Content Include="Views\Gear\Delete.cshtml" />
-    <Content Include="Views\Gear\Success.cshtml" />
-    <Content Include="Views\Bikes\Delete.cshtml" />
-    <Content Include="Views\Bikes\Success.cshtml" />
+    <Content Include="Views\Manager\Delete.cshtml" />
+    <Content Include="Views\Manager\Success.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
-    <Content Include="Views\Manager\BikeCreate.cshtml" />
     <Content Include="Views\Manager\Details.cshtml" />
     <Content Include="Views\Manager\BikeEdit.cshtml" />
     <Content Include="Views\Manager\BikeIndex.cshtml" />
@@ -464,6 +460,7 @@
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Manager\GearIndex.cshtml" />
     <Content Include="Views\Manager\GearCreate.cshtml" />
+    <Content Include="Views\Manager\BikeCreate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

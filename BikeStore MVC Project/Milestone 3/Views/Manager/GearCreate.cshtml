@@ -1,10 +1,8 @@
 ﻿@model MileStone2A.Models.Product
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Gear Create";
 }
-
-<h2>Create</h2>
 
 <head>
     <script type="text/javascript">
@@ -18,37 +16,36 @@
             var bikeCategoryID = category.options[category.selectedIndex].value;
             //window.location = URL + bikeCategory;
 
-            $.post('@Url.Action("GetProductModelsByCategory", "Gear")',
-                { "BikeCategory": bikeCategoryID }, ChangeModelByCategory);
+            $.post('@Url.Action("GetProductModelsByCategory", "Manager")',
+                {"BikeCategory": bikeCategoryID}, ChangeModelByCategory);
         }
 
         //Create HTML for a dropdown for product model using the selected bike category as a filter
         function ChangeModelByCategory(data) {
             var newModelDropDown = "";
+            var modelDropdown = data.BikeModelDropDown;
 
-            var length = 0;
-            for (var x in data) {
-                if (data.hasOwnProperty(x)) {
-                    length++;
+            if (data.Status == "OK") {
+                newModelDropDown += "<select class='form-control' id='ProductModelID' name='ProductModelID'>\n";
+                for (var i = 0; i < modelDropdown.length; i++) {
+                    newModelDropDown += "<option value=" + modelDropdown[i].Value + ">" + modelDropdown[i].Text + "</option>\n"
                 }
-            }
-            
-            newModelDropDown += "<select class='form-control' id='ProductModelID' name='ProductModelID'>\n";
-            for (var i = 0; i < length; i++) {
-                newModelDropDown += "<option value=" + data[i].Value + ">" + data[i].Text + "</option>\n"
-            }
-            newModelDropDown += "</select>\n";
+                newModelDropDown += "</select>\n";
 
-            document.getElementById("modellist").innerHTML = newModelDropDown;
-            
+                document.getElementById("modellist").innerHTML = newModelDropDown;
+            } else {
+                alert("An unexpected error has occured!");
+            }
         }
     </script>
 </head>
 
-@using (Html.BeginForm("GearCreate", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h2>Create a new gear</h2>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
@@ -112,7 +109,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductCategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductCategoryID", null, new { @class = "form-control" , @id = "bikelist", @onchange= "changeCatagory()" })
+                @Html.DropDownList("ProductCategoryID", null, new { @class = "form-control", @id = "bikelist", @onchange = "changeCatagory()" })
                 @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -163,12 +160,8 @@
     </div>
 }
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10" style="margin-top:2%;">
-        @Html.ActionLink("Back to List", "Create", "Home", new { @class = "navbar-brand" })
-    </div>
+<div>
+    @Html.ActionLink("Back to List", "GearIndex", null, new { @class = "otherlink" })
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Scripts.Render("~/bundles/jqueryval")

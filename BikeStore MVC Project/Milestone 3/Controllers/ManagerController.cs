@@ -37,7 +37,7 @@ namespace Milestone_3.Controllers
             }
 
             var products = from x in db.Products.Include(p => p.ProductCategory).Include(p => p.ProductModel)
-                           where x.ProductCategory.ParentProductCategoryID == 1
+                           where x.ProductCategory.ParentProductCategoryID == 1 && x.SellEndDate == null
                            select x;
        
             return View(products.ToList());
@@ -51,10 +51,68 @@ namespace Milestone_3.Controllers
             }
 
             var products = from x in db.Products.Include(p => p.ProductCategory).Include(p => p.ProductModel)
-                           where x.ProductCategory.ParentProductCategoryID != 1
+                           where x.ProductCategory.ParentProductCategoryID != 1 && x.SellEndDate == null
                            select x;
 
             return View(products.ToList());
+        }
+
+        public ActionResult Success()
+        {
+            return View();
+        }
+
+        // GET: Manager/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.IsBike = (from x in db.Products
+                              where x.ProductID == id
+                              select x.ProductCategory.ParentProductCategoryID).First() == 1;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        // POST: Gears/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.IsBike = (from x in db.Products
+                              where x.ProductID == id
+                              select x.ProductCategory.ParentProductCategoryID).First() == 1;
+
+            Product product = db.Products.Find(id);
+            product.SellEndDate = DateTime.Now;
+            db.SaveChanges();
+            return RedirectToAction("Success");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         // GET: BikesManager/Details/5
@@ -117,6 +175,10 @@ namespace Milestone_3.Controllers
                               }).Distinct();
             ViewBag.ProductModelID = BikeModels;
 
+            ViewBag.IsBike = (from x in db.Products
+                              where x.ProductID == id
+                              select x.ProductCategory.ParentProductCategoryID).First() == 1;
+
             return View(product);
         }
 
@@ -173,6 +235,10 @@ namespace Milestone_3.Controllers
                               }).Distinct();
             ViewBag.ProductModelID = BikeModels;
 
+            ViewBag.IsBike = (from x in db.Products
+                              where x.ProductID == product.ProductID
+                              select x.ProductCategory.ParentProductCategoryID).First() == 1;
+
             return View(product);
         }
 
@@ -194,22 +260,28 @@ namespace Milestone_3.Controllers
                 return HttpNotFound();
             }
 
-            var GearCategories = from x in db.ProductCategories
-                                 where x.ProductCategoryID == 2 ||
-                                   x.ProductCategoryID == 3 || x.ProductCategoryID == 4
-                                 select x;
-            ViewBag.ProductCategoryID = new SelectList(GearCategories, "ProductCategoryID", "Name", DEFAULT_BIKE_CATEGORY_ID);
+            var gearCategories = (from x in db.ProductCategories
+                                  where x.ParentProductCategoryID != 1 && x.ProductCategoryID > 4 //the last category
+                                  select new SelectListItem
+                                  {
+                                      Value = x.ProductCategoryID.ToString(),
+                                      Text = x.Name
+                                  }).Distinct();
+            ViewBag.ProductCategoryID = gearCategories;
 
-
-            var GearModels = (from x in db.Products
+            var gearModels = (from x in db.Products
                               where x.ProductCategory.ParentProductCategoryID != 1 &&
                               x.ProductCategory.ProductCategoryID == DEFAULT_GEAR_CATEGORY_ID
                               select new SelectListItem
                               {
-                                  Value = x.ProductModel.ProductModelID.ToString(),
-                                  Text = x.ProductModel.Name
+                                  Value = x.ProductCategoryID.ToString(),
+                                  Text = x.Name
                               }).Distinct();
-            ViewBag.ProductModelID = GearModels;
+            ViewBag.ProductModelID = gearModels;
+
+            ViewBag.IsBike = (from x in db.Products
+                              where x.ProductID == id
+                              select x.ProductCategory.ParentProductCategoryID).First() == 1;
 
             return View(product);
         }
@@ -251,37 +323,8 @@ namespace Milestone_3.Controllers
                 return RedirectToAction("Index");
             }
 
-            var BikeCategories = from x in db.ProductCategories
-                                 where x.ParentProductCategoryID == 1
-                                 select x;
-            ViewBag.ProductCategoryID = new SelectList(BikeCategories, "ProductCategoryID", "Name", DEFAULT_BIKE_CATEGORY_ID);
-
-
-            var BikeModels = (from x in db.Products
-                              where x.ProductCategory.ParentProductCategoryID == 1 &&
-                              x.ProductCategory.ProductCategoryID == DEFAULT_BIKE_CATEGORY_ID
-                              select new SelectListItem
-                              {
-                                  Value = x.ProductModel.ProductModelID.ToString(),
-                                  Text = x.ProductModel.Name
-                              }).Distinct();
-            ViewBag.ProductModelID = BikeModels;
-
-            return View(product);
-        }
-
-        public ActionResult GearCreate()
-        {
-            /*
-            if (IsLoggedIn())
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            */
-
             var gearCategories = (from x in db.ProductCategories
-                                  where x.ProductCategoryID == 2 ||
-                                   x.ProductCategoryID == 3 || x.ProductCategoryID == 4
+                                  where x.ParentProductCategoryID != 1 && x.ProductCategoryID > 4 //the last category
                                   select new SelectListItem
                                   {
                                       Value = x.ProductCategoryID.ToString(),
@@ -290,7 +333,40 @@ namespace Milestone_3.Controllers
             ViewBag.ProductCategoryID = gearCategories;
 
             var gearModels = (from x in db.Products
-                              where x.ProductCategory.ParentProductCategoryID == 1 &&
+                              where x.ProductCategory.ParentProductCategoryID != 1 &&
+                              x.ProductCategory.ProductCategoryID == DEFAULT_GEAR_CATEGORY_ID
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductCategoryID.ToString(),
+                                  Text = x.Name
+                              }).Distinct();
+            ViewBag.ProductModelID = gearModels;
+
+            ViewBag.IsBike = (from x in db.Products
+                              where x.ProductID == product.ProductID
+                              select x.ProductCategory.ParentProductCategoryID).First() == 1;
+
+            return View(product);
+        }
+
+        public ActionResult GearCreate()
+        {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var gearCategories = (from x in db.ProductCategories
+                                  where x.ParentProductCategoryID != 1 && x.ProductCategoryID > 4 //the last category
+                                  select new SelectListItem
+                                  {
+                                      Value = x.ProductCategoryID.ToString(),
+                                      Text = x.Name
+                                  }).Distinct();
+            ViewBag.ProductCategoryID = gearCategories;
+
+            var gearModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID != 1 &&
                               x.ProductCategory.ProductCategoryID == DEFAULT_GEAR_CATEGORY_ID
                               select new SelectListItem
                               {
@@ -306,20 +382,15 @@ namespace Milestone_3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GearCreate([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product, HttpPostedFileBase picture)
         {
-            /*
             if (IsLoggedIn())
             {
                 return RedirectToAction("Index", "Home");
             }
-            */
 
             if (ModelState.IsValid && picture == null)
             {
-
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
-                product.ProductCategoryID = product.ProductModelID;
-                product.ProductModelID = 129;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -331,39 +402,39 @@ namespace Milestone_3.Controllers
                 product.ThumbnailPhotoFileName = picture.FileName;
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
-                product.ProductCategoryID = product.ProductModelID;
-                product.ProductModelID = 129;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            var BikeCategories = from x in db.ProductCategories
-                                 where x.ParentProductCategoryID == 1
-                                 select x;
-            ViewBag.ProductCategoryID = new SelectList(BikeCategories, "ProductCategoryID", "Name", product.ProductCategoryID);
+            var gearCategories = (from x in db.ProductCategories
+                                  where x.ParentProductCategoryID != 1 && x.ProductCategoryID > 4 //the last category
+                                  select new SelectListItem
+                                  {
+                                      Value = x.ProductCategoryID.ToString(),
+                                      Text = x.Name
+                                  }).Distinct();
+            ViewBag.ProductCategoryID = gearCategories;
 
-
-            var BikeModels = (from x in db.Products
-                              where x.ProductCategory.ParentProductCategoryID == 1 &&
-                              x.ProductCategory.ProductCategoryID == product.ProductCategoryID
+            var gearModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID != 1 &&
+                              x.ProductCategory.ProductCategoryID == DEFAULT_GEAR_CATEGORY_ID
                               select new SelectListItem
                               {
-                                  Value = x.ProductModel.ProductModelID.ToString(),
-                                  Text = x.ProductModel.Name
+                                  Value = x.ProductCategoryID.ToString(),
+                                  Text = x.Name
                               }).Distinct();
-            ViewBag.ProductModelID = BikeModels;
+            ViewBag.ProductModelID = gearModels;
+
             return View(product);
         }
 
         public ActionResult BikeCreate()
         {
-            /*
             if (IsLoggedIn())
             {
                 return RedirectToAction("Index", "Home");
             }
-            */
 
             var BikeCategories = from x in db.ProductCategories
                                  where x.ParentProductCategoryID == 1
@@ -391,12 +462,10 @@ namespace Milestone_3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BikeCreate([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product, HttpPostedFileBase picture)
         {
-            /*
             if (IsLoggedIn())
             {
                 return RedirectToAction("Index", "Home");
             }
-            */
             
             if (ModelState.IsValid && picture != null)
             {
@@ -441,8 +510,7 @@ namespace Milestone_3.Controllers
         public ActionResult GetProductModelsByCategory(int BikeCategory)
         {
             var BikeModels = (from x in db.Products
-                              where x.ProductCategory.ParentProductCategoryID == 1 &&
-                              x.ProductCategory.ProductCategoryID == BikeCategory
+                              where x.ProductCategory.ProductCategoryID == BikeCategory
                               select new SelectListItem
                               {
                                   Value = x.ProductModel.ProductModelID.ToString(),
@@ -452,16 +520,18 @@ namespace Milestone_3.Controllers
             return Json(new { BikeModelDropDown = BikeModels, Status = "OK", Error = "" });
         }
 
+        [AllowAnonymous]
         public JsonResult UniqueProductName(string Name)
         {
             const int MORE_THAN_1_NAME = 1;
             var existingNames = (from x in db.Products
-                         where x.Name == Name
-                         select x).Count();
+                                 where x.Name == Name
+                                 select x).Count();
             var result = existingNames < MORE_THAN_1_NAME;
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [AllowAnonymous]
         public JsonResult UniqueProductNumber(string ProductNumber)
         {
             const int MORE_THAN_1_NAME = 1;

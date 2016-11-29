@@ -40,7 +40,7 @@
     </script>
 </head>
 
-<h2>Edit</h2>
+<h2>Edit Gear</h2>
 
 @using (Html.BeginForm())
 {
@@ -119,7 +119,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductCategoryID, "ProductCategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control", @id = "bikelist", @onchange = "changeCatagory()" })
                 @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -127,7 +127,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductModelID, "ProductModelID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductModelID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ProductModelID", null, htmlAttributes: new { @class = "form-control", @id = "modellist" })
                 @Html.ValidationMessageFor(model => model.ProductModelID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -153,5 +153,12 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (ViewBag.IsBike == true)
+    {
+        @Html.ActionLink("Back to List", "BikeIndex", null, new { @class = "otherlink" })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "GearIndex", null, new { @class = "otherlink" })
+    }
 </div>
