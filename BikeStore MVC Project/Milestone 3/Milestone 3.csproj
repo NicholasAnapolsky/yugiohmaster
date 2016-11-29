@@ -447,6 +447,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Reviews\AddReview.cshtml" />
     <Content Include="Views\Reviews\ReviewSuccess.cshtml" />
+    <Content Include="Views\Reviews\getReviews.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

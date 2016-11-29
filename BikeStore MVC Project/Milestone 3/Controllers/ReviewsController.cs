@@ -22,7 +22,7 @@ namespace Milestone_3.Controllers
         }
 
         public ActionResult AddReview(int? id)
-        {
+        {           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -35,6 +35,16 @@ namespace Milestone_3.Controllers
             Reviews review = new Reviews();
             review.ProductID = product.ProductID;
             return View(review);
+        }
+
+        public ActionResult getReviews(int? id)
+        {
+            Product product = db.Products.Find(id);
+            var productReview = from x in db.Reviews where product.ProductID == x.ProductID select x;
+            var reviews = productReview.ToList();
+            ViewBag.Count = reviews.Count;
+
+            return PartialView(reviews);
         }
 
         [HttpPost]
@@ -50,6 +60,7 @@ namespace Milestone_3.Controllers
                 db.Reviews.Add(reviews);
                 db.SaveChanges();
                 return RedirectToAction("ReviewSuccess");
+                //return RedirectToAction("ProductDetails", "Bikes", new {id = reviews.ProductID});
             }
 
             return View(reviews);
