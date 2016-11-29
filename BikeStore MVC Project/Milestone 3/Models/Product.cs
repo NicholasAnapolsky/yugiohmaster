@@ -19,10 +19,10 @@ namespace MileStone2A.Models
         [Key]
         public int ProductID { get; set; }
 
-        [Remote("UniqueProductName", "BikesManager", ErrorMessage = "This Product Name already exists, choose another name.")]
+        [Remote("UniqueProductName", "Manager", ErrorMessage = "This Product Name already exists, choose another name.")]
         public string Name { get; set; }
 
-        [Remote("UniqueProductNumber", "BikesManager", ErrorMessage = "This Product Number already exists, choose another name.")]
+        [Remote("UniqueProductNumber", "Manager", ErrorMessage = "This Product Number already exists, choose another name.")]
         [Display(Name = "Product Number")]
         public string ProductNumber { get; set; }
 
@@ -38,6 +38,7 @@ namespace MileStone2A.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public decimal ListPrice { get; set; }
 
+        [StringLength(5, MinimumLength = 1)]
         public string Size { get; set; }
 
         [Range(0.1, (double)Decimal.MaxValue, ErrorMessage = "The Weight must be greater than 0.1")]

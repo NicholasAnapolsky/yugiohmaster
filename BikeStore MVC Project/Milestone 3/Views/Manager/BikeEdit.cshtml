@@ -40,7 +40,7 @@
     </script>
 </head>
 
-<h2>Edit</h2>
+<h2>Edit Bike</h2>
 
 @using (Html.BeginForm())
 {
@@ -153,5 +153,12 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @if (ViewBag.IsBike == true)
+    {
+        @Html.ActionLink("Back to List", "BikeIndex", null, new { @class = "otherlink" })
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "GearIndex", null, new { @class = "otherlink" })
+    }
 </div>

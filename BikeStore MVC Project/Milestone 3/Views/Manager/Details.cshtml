@@ -9,7 +9,6 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Product</h4>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ProductCategory.Name)
@@ -142,12 +141,10 @@
 <p>
     @if(ViewBag.IsBike == true)
     {
-        @Html.ActionLink("Back to List", "BikeIndex")
+        @Html.ActionLink("Back to List", "BikeIndex", null, new { @class = "otherlink" })
     }
     else
     {
-        @Html.ActionLink("Back to List", "GearIndex")
+        @Html.ActionLink("Back to List", "GearIndex", null, new { @class = "otherlink" })
     }
-
-
 </p>

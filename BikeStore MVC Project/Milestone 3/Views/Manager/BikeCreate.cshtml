@@ -1,10 +1,8 @@
 ﻿@model MileStone2A.Models.Product
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "BikeCreate";
 }
-
-<h2>Create Bike</h2>
 
 <head>
     <script type="text/javascript">
@@ -42,11 +40,15 @@
     </script>
 </head>
 
-@using (Html.BeginForm("BikeCreate", "Manager", FormMethod.Post, new { enctype="multipart/form-data"}))
+<h2>Create a new bike</h2>
+
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -107,7 +109,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductCategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductCategoryID", null,  new { @class = "form-control", @id = "bikelist", @onchange = "changeCatagory()" })
+                @Html.DropDownList("ProductCategoryID", null, new { @class = "form-control", @id = "bikelist", @onchange = "changeCatagory()" })
                 @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -115,7 +117,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductModelID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductModelID", null, htmlAttributes: new { @class = "form-control" , @id = "modellist" })
+                @Html.DropDownList("ProductModelID", null, htmlAttributes: new { @class = "form-control", @id = "modellist" })
                 @Html.ValidationMessageFor(model => model.ProductModelID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -123,7 +125,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SellStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SellStartDate, null, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Now.Date.ToString().Split()[0] } })
+                @Html.EditorFor(model => model.SellStartDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SellStartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -131,7 +133,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SellEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SellEndDate, new { htmlAttributes = new { @class = "form-control" }})
+                @Html.EditorFor(model => model.SellEndDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SellEndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -143,13 +145,12 @@
                 @Html.ValidationMessageFor(model => model.DiscontinuedDate, "", new { @class = "text-danger" })
             </div>
         </div>
-    
+
         <div class="fileUpload btn btn-warning">
             <span>Upload</span>
-            <input type="file" name="picture" id="picture" class="upload"/>
+            <input type="file" name="picture" id="picture" class="upload" />
             @Html.ValidationMessageFor(model => model.ThumbNailPhoto, "", new { @class = "text-danger" })
         </div>
-        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -159,12 +160,8 @@
     </div>
 }
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10" style="margin-top:2%;">
-        @Html.ActionLink("Back to List", "BikeIndex", "Manager", new { @class = "navbar-brand" })
-    </div>
+<div>
+    @Html.ActionLink("Back to List", "BikeIndex", null, new { @class = "otherlink" })
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Scripts.Render("~/bundles/jqueryval")

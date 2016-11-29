@@ -5,10 +5,10 @@
     var emptyValue = "N/A";
 }
 
-<h2>Index</h2>
+<h2>Gear</h2>
 
 <p>
-    <a href="@Href("~/Manager/GearCreate")">Create New</a>
+    <a href="@Href("~/Manager/GearCreate")", class="otherlink">Create New</a>
 </p>
 <table class="table">
     <tr>
@@ -100,7 +100,8 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Edit", "GearEdit", new { id = item.ProductID })
+                @Html.ActionLink("Edit", "GearEdit", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
             </td>
         </tr>
     }
