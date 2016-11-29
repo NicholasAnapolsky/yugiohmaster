@@ -209,10 +209,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BikesController.cs" />
-    <Compile Include="Controllers\BikesManagerController.cs" />
     <Compile Include="Controllers\GearController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -341,15 +341,32 @@
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\tr\FluentValidation.resources.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\demo.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
     <Content Include="Content\images\bikeGear.jpg" />
+    <Content Include="Content\images\BikePictures\mountainBike1.jpg" />
+    <Content Include="Content\images\BikePictures\mountainBike2.jpg" />
+    <Content Include="Content\images\BikePictures\roadBike1.jpg" />
+    <Content Include="Content\images\BikePictures\roadBike2.jpg" />
+    <Content Include="Content\images\BikePictures\urbanBike1.jpg" />
+    <Content Include="Content\images\BikePictures\urbanBike2.jpg" />
     <Content Include="Content\images\bikeRace.jpg" />
+    <Content Include="Content\images\GearPictures\bikewheel.jpg" />
+    <Content Include="Content\images\GearPictures\biking-equipment.jpg" />
+    <Content Include="Content\images\GearPictures\gearJerseyFemale.jpg" />
+    <Content Include="Content\images\GearPictures\gearJerseys2.jpg" />
+    <Content Include="Content\images\GearPictures\socks.jpg" />
+    <Content Include="Content\images\HomePictures\bikeGear.jpg" />
+    <Content Include="Content\images\HomePictures\bikeRace.jpg" />
+    <Content Include="Content\images\HomePictures\mountainBike.jpg" />
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\img2.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mountainBike.jpg" />
     <Content Include="Content\jquery-3.1.1.min.js" />
+    <Content Include="Content\jquery.custom-file-input.js" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\gj.jpg" />
     <Content Include="favicon.ico" />
@@ -448,6 +465,16 @@
     <Content Include="Views\Reviews\ReviewSuccess.cshtml" />
     <Content Include="Views\Reviews\getReviews.cshtml" />
     <Content Include="Views\Reviews\AddReviews.cshtml" />
+    <Content Include="Views\Manager\BikeCreate.cshtml" />
+    <Content Include="Views\Manager\BikeEdit.cshtml" />
+    <Content Include="Views\Manager\BikeIndex.cshtml" />
+    <Content Include="Views\Manager\Delete.cshtml" />
+    <Content Include="Views\Manager\Details.cshtml" />
+    <Content Include="Views\Manager\GearCreate.cshtml" />
+    <Content Include="Views\Manager\GearEdit.cshtml" />
+    <Content Include="Views\Manager\GearIndex.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\Success.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
