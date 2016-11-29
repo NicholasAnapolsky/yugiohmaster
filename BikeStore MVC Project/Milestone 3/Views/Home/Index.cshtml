@@ -3,86 +3,41 @@
 }
 
 <h2>We Sell Only Our Quality Brands, at Low Prices!</h2>
-<p>
-    If you came for a great variety of bikes made by us alone<br>
-    you came to the right place! <strong>Bikes 'R' Us</strong> brings you<br>
-    the smooth ride that you desire, at a competitively low<br>
-    price to boot. So if you desire that perfect bike <br>
-    we can deliver, with a variety of models you will not <br>
+<p><i>
+    If you came for a great variety of bikes made by us alone
+    you came to the right place! <strong>Bikes 'R' Us</strong> brings you
+    the smooth ride that you desire, at a competitively low
+    price to boot. So if you desire that perfect bike
+    we can deliver, with a variety of models you will not
     find anywhere else!
+</i></p>
+
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    Mauris ac sem sed lectus egestas posuere eget a enim. Morbi feugiat, 
+    sem nec lobortis volutpat, arcu tellus pharetra massa, 
+    non vehicula ipsum purus vitae leo. Vivamus vel consectetur risus. 
+    Fusce fringilla auctor est. Nam egestas mattis porttitor. 
+    Duis tristique dui lectus, eu convallis massa placerat a. 
+    Nam vitae elit urna. Ut ipsum tellus, ornare molestie semper nec, 
+    bibendum nec lacus. Praesent rutrum odio ac urna maximus, 
+    at tempor diam facilisis. Vivamus euismod, tortor ac mattis porttitor, 
+    lorem elit aliquet est, sed vulputate tortor augue ut ligula. 
+    Sed condimentum iaculis nibh, et molestie lorem bibendum fringilla. 
+    Vivamus accumsan tellus turpis, vel condimentum leo consectetur at. 
 </p>
-
-
-<div class="slideshow-container">
-
-    <div class="mySlides fade">
-        <div class="numbertext">1 / 3</div>
-        <img src="~/Content/images/HomePictures/bikeGear.jpg" style="width:100%">
-        <div class="text"></div>
-    </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="~/Content/images/HomePictures/mountainBike.jpg" style="width:100%">
-        <div class="text"></div>
-    </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="~/Content/images/HomePictures/bikeRace.jpg" style="width:100%">
-        <div class="text"></div>
-    </div>
-
-    <a class="prev" onclick="plusSlides(-1)">❮</a>
-    <a class="next" onclick="plusSlides(1)">❯</a>
-
-</div>
-<br>
-
-<div style="text-align:center">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-</div>
-
-<script>
-    
-    'use strict';
-    var slideIndex = 1;
-    var mytimer = setTimeout(showSlides, 5000);
-    //window.onload = showSlides(slideIndex);
-    plusSlides(0);
-    function plusSlides(n) {
-        clearTimeout(mytimer);
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        clearTimeout(mytimer);
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        //alert('showslides('+ n +')\nslideIndex='+slideIndex);
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        if (n == undefined) { n = ++slideIndex }
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        mytimer = setTimeout(showSlides, 5000);
-        //setTimeout(showSlides, 5000); // Change image every 5 seconds
-    }
-</script>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<p>
+    Suspendisse ac volutpat neque, sed hendrerit mi. 
+    Etiam in tortor finibus, aliquam tellus in, faucibus dolor. 
+    Nunc orci justo, suscipit at ligula ut, scelerisque tincidunt erat. 
+    Suspendisse egestas molestie turpis, sed imperdiet nisi molestie a. 
+    Morbi quis orci hendrerit purus feugiat vestibulum. 
+    Etiam metus lorem, venenatis at odio ut, placerat auctor elit. 
+    Integer vel mattis libero. Phasellus blandit, eros et rutrum ornare, 
+    diam urna tristique nulla, vitae facilisis velit lorem sit amet ante. 
+    Suspendisse potenti. Maecenas bibendum nibh scelerisque,
+    ullamcorper mi non, rutrum ante. Nunc convallis vehicula mi et fermentum. 
+    Proin in venenatis nulla, id interdum tellus. 
+    Fusce laoreet sollicitudin nulla, id ultrices lectus lobortis ut. 
+    Nullam imperdiet ac felis ac varius. 
+</p>

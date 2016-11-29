@@ -339,6 +339,7 @@
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\tr\FluentValidation.resources.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\demo.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
     <Content Include="Content\images\BikePictures\mountainBike1.jpg" />
@@ -359,6 +360,8 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\HomePictures\mountainBike.jpg" />
     <Content Include="Content\jquery-3.1.1.min.js" />
+    <Content Include="Content\jquery.custom-file-input.js" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\gj.jpg" />
     <Content Include="favicon.ico" />
@@ -390,7 +393,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
