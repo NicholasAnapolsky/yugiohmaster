@@ -8,16 +8,28 @@ using System.Web;
 using System.Web.Mvc;
 using MileStone2A.Models;
 using Milestone_3.Models;
+using System.Globalization;
 
 namespace Milestone_3.Controllers
 {
-    public class BikesManagerController : Controller
+    public class ManagerController : Controller
     {
         private BikeDBContext db = new BikeDBContext();
         const int DEFAULT_BIKE_CATEGORY_ID = 5;
+        const int DEFAULT_GEAR_CATEGORY_ID = 8;
+
+        public ActionResult Index()
+        {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
 
         // GET: BikesManager
-        public ActionResult Index()
+        public ActionResult BikeIndex()
         {
             if (IsLoggedIn())
             {
@@ -32,7 +44,7 @@ namespace Milestone_3.Controllers
         }
 
         // GET: BikesManager/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult BikeDetails(int? id)
         {
             if (IsLoggedIn())
             {
@@ -54,7 +66,7 @@ namespace Milestone_3.Controllers
         }
 
         // GET: Products/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult BikeEdit(int? id)
         {
             if (IsLoggedIn())
             {
@@ -70,8 +82,23 @@ namespace Milestone_3.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "Name", product.ProductCategoryID);
-            ViewBag.ProductModelID = new SelectList(db.ProductModel, "ProductModelID", "Name", product.ProductModelID);
+
+            var BikeCategories = from x in db.ProductCategories
+                                 where x.ParentProductCategoryID == 1
+                                 select x;
+            ViewBag.ProductCategoryID = new SelectList(BikeCategories, "ProductCategoryID", "Name", DEFAULT_BIKE_CATEGORY_ID);
+
+
+            var BikeModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID == 1 &&
+                              x.ProductCategory.ProductCategoryID == DEFAULT_BIKE_CATEGORY_ID
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductModel.ProductModelID.ToString(),
+                                  Text = x.ProductModel.Name
+                              }).Distinct();
+            ViewBag.ProductModelID = BikeModels;
+
             return View(product);
         }
 
@@ -80,7 +107,100 @@ namespace Milestone_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,rowguid,ModifiedDate")] Product product)
+        public ActionResult BikeEdit([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,rowguid,ModifiedDate")] Product product, HttpPostedFileBase picture)
+        {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var OrgSellStartDate = (from x in db.Products
+                                   where x.ProductID == product.ProductID
+                                   select x.SellStartDate).First();
+
+            if (ModelState.IsValid && picture != null)
+            {
+                product.ThumbNailPhoto = new byte[picture.ContentLength];
+                picture.InputStream.Read(product.ThumbNailPhoto, 0, picture.ContentLength);
+                product.ThumbnailPhotoFileName = picture.FileName;
+
+                product.ModifiedDate = DateTime.Now;
+                product.SellStartDate = OrgSellStartDate;
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else if (ModelState.IsValid)
+            {
+                product.ModifiedDate = DateTime.Now;
+                product.SellStartDate = OrgSellStartDate;
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            var BikeCategories = from x in db.ProductCategories
+                                 where x.ParentProductCategoryID == 1
+                                 select x;
+            ViewBag.ProductCategoryID = new SelectList(BikeCategories, "ProductCategoryID", "Name", DEFAULT_BIKE_CATEGORY_ID);
+
+
+            var BikeModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID == 1 &&
+                              x.ProductCategory.ProductCategoryID == DEFAULT_BIKE_CATEGORY_ID
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductModel.ProductModelID.ToString(),
+                                  Text = x.ProductModel.Name
+                              }).Distinct();
+            ViewBag.ProductModelID = BikeModels;
+
+            return View(product);
+        }
+
+        // GET: Products/Edit/5
+        public ActionResult GearEdit(int? id)
+        {
+            if (IsLoggedIn())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            var GearCategories = from x in db.ProductCategories
+                                 where x.ParentProductCategoryID != 1
+                                 select x;
+            ViewBag.ProductCategoryID = new SelectList(GearCategories, "ProductCategoryID", "Name", DEFAULT_BIKE_CATEGORY_ID);
+
+
+            var GearModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID != 1 &&
+                              x.ProductCategory.ProductCategoryID == DEFAULT_GEAR_CATEGORY_ID
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductModel.ProductModelID.ToString(),
+                                  Text = x.ProductModel.Name
+                              }).Distinct();
+            ViewBag.ProductModelID = GearModels;
+
+            return View(product);
+        }
+
+        // POST: Products/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GearEdit([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbNailPhoto,ThumbnailPhotoFileName,rowguid,ModifiedDate")] Product product)
         {
             if (IsLoggedIn())
             {
@@ -94,12 +214,27 @@ namespace Milestone_3.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories, "ProductCategoryID", "Name", product.ProductCategoryID);
-            ViewBag.ProductModelID = new SelectList(db.ProductModel, "ProductModelID", "Name", product.ProductModelID);
+
+            var BikeCategories = from x in db.ProductCategories
+                                 where x.ParentProductCategoryID == 1
+                                 select x;
+            ViewBag.ProductCategoryID = new SelectList(BikeCategories, "ProductCategoryID", "Name", DEFAULT_BIKE_CATEGORY_ID);
+
+
+            var BikeModels = (from x in db.Products
+                              where x.ProductCategory.ParentProductCategoryID == 1 &&
+                              x.ProductCategory.ProductCategoryID == DEFAULT_BIKE_CATEGORY_ID
+                              select new SelectListItem
+                              {
+                                  Value = x.ProductModel.ProductModelID.ToString(),
+                                  Text = x.ProductModel.Name
+                              }).Distinct();
+            ViewBag.ProductModelID = BikeModels;
+
             return View(product);
         }
 
-        public ActionResult Create()
+        public ActionResult BikeCreate()
         {
             if (IsLoggedIn())
             {
@@ -130,7 +265,7 @@ namespace Milestone_3.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product, HttpPostedFileBase picture)
+        public ActionResult BikeCreate([Bind(Include = "ProductID,Name,ProductNumber,Color,StandardCost,ListPrice,Size,Weight,ProductCategoryID,ProductModelID,SellStartDate,SellEndDate,DiscontinuedDate,ThumbnailPhotoFileName,ModifiedDate,Rowguid")] Product product, HttpPostedFileBase picture)
         {
             if (IsLoggedIn())
             {
@@ -149,7 +284,7 @@ namespace Milestone_3.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            else
+            else if (ModelState.IsValid)
             {
                 product.ModifiedDate = DateTime.Now;
                 product.rowguid = Guid.NewGuid();
