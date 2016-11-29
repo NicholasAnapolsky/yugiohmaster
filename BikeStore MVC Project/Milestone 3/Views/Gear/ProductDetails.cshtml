@@ -8,41 +8,43 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Product</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductCategory.Name)
-        </dt>
+    <h3>Product</h3>
+    <hr />
+    <div class="productdeets">
+        <br />
+        <span class="master">@Html.DisplayNameFor(model => model.ProductCategory.Name)</span>
+        <br />
+        <span class="listed">@Html.DisplayFor(model => model.ProductCategory.Name)</span>
+        <br />
+        <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductCategory.Name)
-        </dd>
+        <span class="master">@Html.DisplayNameFor(model => model.Name)</span>
+        <br />
+        <span class="listed">@Html.DisplayFor(model => model.Name)</span>
+        <br />
+        <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <span class="master">@Html.DisplayNameFor(model => model.ProductNumber)</span>
+        <br />
+        <span class="listed">@Html.DisplayFor(model => model.ProductNumber)</span>
+        <br />
+        <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <span class="master">@Html.DisplayNameFor(model => model.ListPrice)</span>
+        <br />
+        <span class="listed">@Html.DisplayFor(model => model.ListPrice)</span>
+        <br />
+        <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ListPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ListPrice)
-        </dd>
-        
-    </dl>
+        <span class="master">@Html.DisplayNameFor(model => model.ThumbNailPhoto)</span>
+        <br />
+        @if (Model.ThumbnailPhotoFileName == null)
+        { <span class="listed"> No image for this bicycle.</span> }
+        else
+        { <img src="data:image/jpg;base64,@(Convert.ToBase64String(image))" /> }
+        <br />
+        <br />
+    </div>
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "otherlink" })

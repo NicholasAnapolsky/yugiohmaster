@@ -8,7 +8,7 @@
 
 <h2>Gear Products</h2>
 
-<table class="table">
+<table class="table" align="center">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -27,8 +27,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
         </th>
     </tr>
 
@@ -72,15 +70,6 @@
             {
                 @Html.DisplayFor(modelItem => item.Weight)
             }
-        </td>
-        <td>
-            @if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
-                {
-                    Html.Raw("");
-                }
-                else
-                { @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "otherlink" });
-                }
         </td>
     </tr>
 }

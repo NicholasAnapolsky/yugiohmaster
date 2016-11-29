@@ -149,6 +149,7 @@ namespace Milestone2B.Controllers
         [HttpPost]
         public ActionResult ManageLogin(string Email, string Password)
         {
+            
             var managerQuery = from x in db.Managers
                                where x.Email == Email &&
                                x.Password == Password
@@ -156,7 +157,7 @@ namespace Milestone2B.Controllers
             if ((string)Session["LoggedIn"] == "true")
             {
                 Session["LoggedIn"] = "false";
-                Session.Clear();
+                
                 return Json(new { ManagerModel = new Managers(), Status = "OK", Error = "" });
             }
             else
