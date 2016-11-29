@@ -21,8 +21,10 @@ namespace Milestone_3.Controllers
             return View(db.Reviews.ToList());
         }
 
-        public ActionResult AddReview(int? id)
-        {           
+
+
+        public ActionResult AddReviews(int? id)
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -34,9 +36,8 @@ namespace Milestone_3.Controllers
             }
             Reviews review = new Reviews();
             review.ProductID = product.ProductID;
-            return View(review);
+            return PartialView(review);
         }
-
         public ActionResult getReviews(int? id)
         {
             Product product = db.Products.Find(id);
@@ -47,9 +48,10 @@ namespace Milestone_3.Controllers
             return PartialView(reviews);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddReview([Bind(Include = "id,Name,ProductID,Review,Rating")] Reviews reviews)
+        public ActionResult AddReviews([Bind(Include = "id,Name,ProductID,Review,Rating")] Reviews reviews)
         {
             if (ModelState.IsValid)
             {
@@ -59,10 +61,10 @@ namespace Milestone_3.Controllers
                 }
                 db.Reviews.Add(reviews);
                 db.SaveChanges();
-                return RedirectToAction("ReviewSuccess");
+                //return RedirectToAction("ReviewSuccess", "Reviews");
             }
 
-            return View(reviews);
+            return PartialView(reviews);
         }
 
         public ActionResult ReviewSuccess()
