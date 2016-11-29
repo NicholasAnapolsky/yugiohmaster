@@ -60,7 +60,6 @@ namespace Milestone_3.Controllers
                 db.Reviews.Add(reviews);
                 db.SaveChanges();
                 return RedirectToAction("ReviewSuccess");
-                //return RedirectToAction("ProductDetails", "Bikes", new {id = reviews.ProductID});
             }
 
             return View(reviews);
