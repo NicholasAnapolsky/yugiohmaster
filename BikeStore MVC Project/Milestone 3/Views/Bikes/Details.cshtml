@@ -46,13 +46,10 @@
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
-                @if (Session.Count == 0 || Session["Loggedin"].Equals("false"))
-                {
-                    Html.Raw("");
-                }
-                else
-                { @Html.ActionLink("Delete", "Delete", new { id = item.ProductID }, new { @class = "otherlink" });
-                }                
+                <p class="button">
+                    @Html.ActionLink("Add to cart", "AddToCart",
+        "ShoppingCart", new { id = item.ProductID }, "")
+                </p>    
             </td>
         </tr>
     }
