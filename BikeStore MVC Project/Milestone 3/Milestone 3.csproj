@@ -457,11 +457,13 @@
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Manager\BikeCreate.cshtml" />
-    <Content Include="Views\Manager\BikeDetails.cshtml" />
+    <Content Include="Views\Manager\Details.cshtml" />
     <Content Include="Views\Manager\BikeEdit.cshtml" />
     <Content Include="Views\Manager\BikeIndex.cshtml" />
     <Content Include="Views\Manager\GearEdit.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\GearIndex.cshtml" />
+    <Content Include="Views\Manager\GearCreate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
