@@ -209,10 +209,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BikesController.cs" />
-    <Compile Include="Controllers\BikesManagerController.cs" />
     <Compile Include="Controllers\GearController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -339,6 +339,7 @@
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\tr\FluentValidation.resources.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\demo.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bgdark.jpg" />
     <Content Include="Content\images\BikePictures\mountainBike1.jpg" />
@@ -359,12 +360,15 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\HomePictures\mountainBike.jpg" />
     <Content Include="Content\jquery-3.1.1.min.js" />
+    <Content Include="Content\jquery.custom-file-input.js" />
+    <Content Include="Content\normalize.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\gj.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="manager_table.sql" />
+    <Content Include="product with description.sql" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -389,7 +393,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -432,15 +438,11 @@
     <Content Include="Views\Gear\Components.cshtml" />
     <Content Include="Views\Gear\Details.cshtml" />
     <Content Include="Views\Gear\Index.cshtml" />
-    <Content Include="Views\BikesManager\Create.cshtml" />
-    <Content Include="Views\BikesManager\Details.cshtml" />
-    <Content Include="Views\BikesManager\Index.cshtml" />
     <Content Include="Views\Home\ContactResult.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Gear\ProductDetails.cshtml" />
     <Content Include="Views\Bikes\ProductDetails.cshtml" />
-    <Content Include="Views\BikesManager\Edit.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
@@ -454,6 +456,14 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Manager\BikeCreate.cshtml" />
+    <Content Include="Views\Manager\Details.cshtml" />
+    <Content Include="Views\Manager\BikeEdit.cshtml" />
+    <Content Include="Views\Manager\BikeIndex.cshtml" />
+    <Content Include="Views\Manager\GearEdit.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\GearIndex.cshtml" />
+    <Content Include="Views\Manager\GearCreate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
