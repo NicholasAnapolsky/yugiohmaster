@@ -179,7 +179,6 @@
             border:1px rgb(40,20,30) solid;
         }
 
-
         .show {display:block;}
     /* ================== */
 
@@ -288,20 +287,29 @@
         INPUT FOR CREATE
        ================== */
         .form-control {
-          width: 200px;
-          height: 20px;
-          padding: 4px 12px;
-          font-size: 14px;
-          line-height: 1.428571429;
-          color: #555555;
-          vertical-align: middle;
-          background-color: #ffffff;
-          border: 1px solid #cccccc;
-          border-radius: 4px;
-          -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-                  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-                  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            width: 200px;
+            height: 30px;
+            padding: 4px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+                    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            resize: none;
+        }
+
+        textarea {
+            width: 200px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            resize: none;
+            height: 120px;
         }
     /* ================== */
 
@@ -317,13 +325,17 @@
     /* =================
         DETAILS CONTENT
        ================= */
-        .dl-horizontal dt {
-          font-size: 1.5em;
+        .master {
+          font-size: 23px;
           text-decoration: underline;
-            padding: 10px;
+            color : #c88;
+        }
+
+        .listed {
+          font-size: 17px;
         }
     /* ================== */
-
+    
     /* ==================
         SLIDE SHOW STUFF
        ================== */
@@ -423,5 +435,12 @@
           .prev, .next,.text {font-size: 11px}
         }
     /* ================== */
+    
+    /* ===========
+        CENTER ME
+       =========== */
+        .center-me {
+            text-align:center;
+        }
 
 /* ===================================================== */

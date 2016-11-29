@@ -17,49 +17,74 @@
             $(".body-content").css("transition", "all 0.4s 0s ease");
             $(".body-content").css("opacity", "0");
         });
+
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
     </script>
     @Styles.Render("~/Content/css")
 </head>
 <body>
     <div class="background-image"></div>
+    <div class="superwrap">
         <nav>
             <div class="nav-content">
-                @Html.ActionLink(".", "Index", "Home", new { area = "" }, new { @class = "logo" })
-                <hr />
                 <div class="nav-link">
-                   
-                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
-                    @if (Session.IsNewSession || Session.Count == 0 || Session["LoggedIn"] == null ||  Session["LoggedIn"].Equals("false") )
-                    {
-                        Html.Raw("");
-                    }
-                    else { @Html.ActionLink("Manage Products", "Index", "Manager", new { area = "" }, new { @class = "navbar-brand" }); }
-                    @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
-
-                    @using (Html.BeginForm("Index2", "Home"))
-                    {@Html.AntiForgeryToken(); @Html.TextBox("SearchString") <input type="submit" value="Search" />}
-                </div>
-                <hr />
-                <div class="login">
-                    @Html.Action("_Login", "Home")
+                    @Html.ActionLink(".", "Index", "Home", new { area = "" }, new { @class = "logo" })
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Bikes", "Index", "Bikes", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Gear", "Index", "Gear", new { area = "" }, new { @class = "navbar-brand" })
+                        </div>
+                    </div>
+                    <div class="search-bar">
+                        @using (Html.BeginForm("Index2", "Home"))
+                        {@Html.AntiForgeryToken(); @Html.TextBox("SearchString") <input type="submit" value="Search" />}
+                    </div>
+                    <div class="login">
+                        @Html.Action("_Login", "Home")
+                        @if (Session.IsNewSession || Session.Count == 0 || Session["LoggedIn"] == null || Session["LoggedIn"].Equals("false")) { }
+                        else
+                        { <br />@Html.ActionLink("Add Item to Database", "Create", "Home", new { area = "" }, new { @class = "otherlink" });
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
 
         <div class="body-content" id="fade">
             @RenderBody()
-            
         </div>
-        <footer><a class="social facebook" href="https://www.facebook.com/pg/TheRealBikesRUs/reviews/"></a>
-                <a class="social twitter" href="https://twitter.com/TheRealBikesRUs"></a>
-                <label>@DateTime.Now.Year - &copy; Bikes 'R' Us'</label>
-            
+    </div>
+
+        <footer>
+            <a class="social facebook" href="https://www.facebook.com/pg/TheRealBikesRUs/reviews/"></a>
+            <a class="social twitter" href="https://twitter.com/TheRealBikesRUs"></a>
+            <p>@DateTime.Now.Year - &copy; Bikes 'R' Us'</p>
         </footer>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
-            @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
 </body>
 </html>
