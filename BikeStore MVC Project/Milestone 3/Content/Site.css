@@ -424,4 +424,55 @@
         }
     /* ================== */
 
-/* ===================================================== */
+/* ===========SOCIAL LINKS================= */
+
+.social {
+  background: url('http://arunendapally.com/themes/CustomTheme/ss.png');
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+.facebook {
+  background-position: -0px -0px;
+}
+.twitter {
+  background-position: -0px -84px;
+}
+
+/* ====================== About us list ================= */
+#button {
+ width: 100%;
+ border-right: 1px solid #000;
+ padding: 0 0 1em 0;
+ margin-bottom: 1em;
+ font-family: 'Trebuchet MS', 'Lucida Grande',
+   Verdana, Lucida, Geneva, Helvetica, 
+   Arial, sans-serif;
+ background-color: #644646;
+ color: #333;
+ }
+
+ #button ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  }
+  
+ #button li {
+  border-bottom: 1px solid;
+  margin: 0;
+  }
+
+  #button li a {
+  display: block;
+  padding: 5px 5px 5px 0.5em;
+
+  background-color: #4C3E3E;
+  
+  color: #fff;
+  text-decoration: none;
+  width: 100%;
+  } 

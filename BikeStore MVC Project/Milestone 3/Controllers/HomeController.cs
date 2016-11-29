@@ -24,6 +24,11 @@ namespace Milestone2B.Controllers
             return View();
         }
 
+        public ActionResult AboutUs()
+        {
+            return View();
+        }
+
         public ActionResult Index2()
         {
             var categories = from x in db.Products select x;
@@ -136,7 +141,7 @@ namespace Milestone2B.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "We sell bikes here, we also sell other bike stuff like gloves and shirts and stuff...";
 
             return View();
         }

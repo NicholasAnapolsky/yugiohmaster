@@ -37,6 +37,7 @@
                     }
                     else { @Html.ActionLink("Manage Products", "Index", "Manager", new { area = "" }, new { @class = "navbar-brand" }); }
                     @Html.ActionLink("Contact Us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("About Us", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                     @using (Html.BeginForm("Index2", "Home"))
                     {@Html.AntiForgeryToken(); @Html.TextBox("SearchString") <input type="submit" value="Search" />}
