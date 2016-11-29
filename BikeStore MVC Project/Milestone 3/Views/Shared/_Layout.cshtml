@@ -65,7 +65,7 @@
                         @Html.Action("_Login", "Home")
                         @if (Session.IsNewSession || Session.Count == 0 || Session["LoggedIn"] == null || Session["LoggedIn"].Equals("false")) { }
                         else
-                        { <br />@Html.ActionLink("Add Item to Database", "Create", "Home", new { area = "" }, new { @class = "otherlink" });
+                        { <br />@Html.ActionLink("Manage Products", "Index", "Manager", new { area = "" }, new { @class = "otherlink" });
                         }
                     </div>
                 </div>
