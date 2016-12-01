@@ -65,3 +65,7 @@
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "otherlink" })
 </p>
+
+@Html.Action("AddReviews", "Reviews", new { id = Model.ProductID })
+
+@Html.Action("getReviews", "Reviews", new { id = Model.ProductID })

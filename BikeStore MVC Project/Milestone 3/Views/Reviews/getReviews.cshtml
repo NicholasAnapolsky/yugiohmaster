@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Milestone_3.Models.Reviews>
+
+@{
+    ViewBag.Title = "getReviews";
+}
+
+<h2>Reviews</h2>
+
+@if(ViewBag.Count == 0)
+{
+    <p>No Reviews as of Yet</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Review)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Review)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

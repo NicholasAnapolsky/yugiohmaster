@@ -20,5 +20,7 @@ namespace MileStone2A.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductModel> ProductModel { get; set; }
         public DbSet<Managers> Managers { get; set; }
+
+        public System.Data.Entity.DbSet<Milestone_3.Models.Reviews> Reviews { get; set; }
     }
 }
