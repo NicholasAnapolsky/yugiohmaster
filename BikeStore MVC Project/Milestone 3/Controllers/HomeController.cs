@@ -182,5 +182,38 @@ namespace Milestone2B.Controllers
 
             return Json(new { ManagerModel = new Managers(), Status = "OK", Error = "" });
         }
+
+        public ActionResult _Cart()
+        {
+            if (Session.Count == 0 && Session["Cart"] == null)
+            {
+                Session["Cart"] = new List<Cart>();
+            }
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult ClearCart()
+        {
+            Session["Cart"] = new List<Cart>();
+            return Json(new { Status = "OK", Error = "" });
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(int? id)
+        {
+            if (Session.Count == 0 && Session["Cart"] == null)
+            {
+                Session["Cart"] = new List<Cart>();
+            }
+
+            Product product = db.Products.Find(id);
+
+            var curCart = (List<Cart>)Session["Cart"];
+            curCart.Add(new Cart(product.Name, product.Color, product.ListPrice, product.Size, product.Weight));
+            Session["Cart"] = curCart;
+
+            return Json(new { Status = "OK", Error = "" });
+        }
     }
 }
