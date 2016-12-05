@@ -202,6 +202,10 @@ namespace Milestone2B.Controllers
         [HttpPost]
         public ActionResult AddToCart(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             if (Session.Count == 0 && Session["Cart"] == null)
             {
                 Session["Cart"] = new List<Cart>();
@@ -210,7 +214,31 @@ namespace Milestone2B.Controllers
             Product product = db.Products.Find(id);
 
             var curCart = (List<Cart>)Session["Cart"];
-            curCart.Add(new Cart(product.Name, product.Color, product.ListPrice, product.Size, product.Weight));
+            curCart.Add(new Cart(product.ProductID, product.Name, product.Color, product.ListPrice, product.Size, product.Weight));
+            Session["Cart"] = curCart;
+
+            return Json(new { Status = "OK", Error = "" });
+        }
+
+        [HttpPost]
+        public ActionResult RemFromCart(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (Session.Count == 0 && Session["Cart"] == null)
+            {
+                Session["Cart"] = new List<Cart>();
+            }
+
+            Product product = db.Products.Find(id);
+
+            var curCart = (List<Cart>)Session["Cart"];
+
+            Cart remItem = curCart.Find(x => x.productID == id);
+
+            curCart.Remove(remItem);
             Session["Cart"] = curCart;
 
             return Json(new { Status = "OK", Error = "" });
