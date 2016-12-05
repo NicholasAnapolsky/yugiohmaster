@@ -221,6 +221,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BikeDBContext.cs" />
     <Compile Include="Models\BikeListModel.cs" />
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Managers.cs" />
@@ -475,6 +476,8 @@
     <Content Include="Views\Manager\GearIndex.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Manager\Success.cshtml" />
+    <Content Include="Views\Shared\_Cart.cshtml" />
+    <Content Include="Views\Home\Success.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

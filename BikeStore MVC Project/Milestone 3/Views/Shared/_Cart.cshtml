@@ -23,14 +23,21 @@
         { "id": id }, ReformContent);
     }
 
+    function checkout() {
+        $.post('@Url.Action("Checkout", "Home")',
+        {}, ReformContent);
+    }
+
     //Create HTML for a dropdown for product model using the selected bike category as a filter
     function ReformContent(data) {
         var products = data.products;
         var newCart = "";
         if (data.Status == "OK") {
-            location.reload();
+            location.reload();           
+        } else if (data.Status == "Checkout") {
+            document.location.href = '@Url.Action("Success", "Home")';
         } else {
-            alert("An unexpected error has occured!");
+            alert(data.Error);
         }
     }
 </script>
@@ -46,14 +53,23 @@
     {
         <tr>
             <td>@cartList[i].Name</td>
-            <td>@cartList[i].Price</td>
+            <td>@Html.FormatValue(cartList[i].Price, "{0:c}")</td>
             <td><input type="button" value="Delete" class="btn btn-default" onclick="rem_cart(@cartList[i].productID)" /></td>
         </tr>
     }
 </table>
+<div class="form-group">
+    Total: @Html.FormatValue(Session["Total"], "{0:c}")
+</div>
 
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         <input type="button" value="Clear Cart" class="btn btn-default" onclick="clear_cart()" />
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Checkout" class="btn btn-default" onclick="checkout()" />
     </div>
 </div>
