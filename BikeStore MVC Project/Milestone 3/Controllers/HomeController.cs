@@ -188,7 +188,8 @@ namespace Milestone2B.Controllers
             if (Session.Count == 0 && Session["Cart"] == null)
             {
                 Session["Cart"] = new List<Cart>();
-            }
+                Session["Total"] = 0;
+            }           
             return PartialView();
         }
 
@@ -196,6 +197,7 @@ namespace Milestone2B.Controllers
         public ActionResult ClearCart()
         {
             Session["Cart"] = new List<Cart>();
+            Session["Total"] = 0;
             return Json(new { Status = "OK", Error = "" });
         }
 
@@ -209,6 +211,7 @@ namespace Milestone2B.Controllers
             if (Session.Count == 0 && Session["Cart"] == null)
             {
                 Session["Cart"] = new List<Cart>();
+                Session["Total"] = 0;
             }
 
             Product product = db.Products.Find(id);
@@ -216,6 +219,7 @@ namespace Milestone2B.Controllers
             var curCart = (List<Cart>)Session["Cart"];
             curCart.Add(new Cart(product.ProductID, product.Name, product.Color, product.ListPrice, product.Size, product.Weight));
             Session["Cart"] = curCart;
+            Session["Total"] = product.ListPrice + Convert.ToDecimal(Session["Total"]);
 
             return Json(new { Status = "OK", Error = "" });
         }
@@ -230,9 +234,8 @@ namespace Milestone2B.Controllers
             if (Session.Count == 0 && Session["Cart"] == null)
             {
                 Session["Cart"] = new List<Cart>();
+                Session["Total"] = 0;
             }
-
-            Product product = db.Products.Find(id);
 
             var curCart = (List<Cart>)Session["Cart"];
 
@@ -240,8 +243,30 @@ namespace Milestone2B.Controllers
 
             curCart.Remove(remItem);
             Session["Cart"] = curCart;
+            Session["Total"] = Convert.ToDecimal(Session["Total"]) - remItem.Price;
 
             return Json(new { Status = "OK", Error = "" });
+        }
+
+        [HttpPost]
+        public ActionResult Checkout()
+        {
+            if (Convert.ToDecimal(Session["Total"]) != 0)
+            {
+                Session["Cart"] = new List<Cart>();
+                Session["Total"] = 0;
+
+                return Json(new { Status = "Checkout", Error = "" });
+            }
+            else
+            {
+                return Json(new { Status = "Error", Error = "Add products to the cart before checking out." });
+            }
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }
