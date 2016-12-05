@@ -1,0 +1,59 @@
+﻿@using Milestone_3.Models;
+@{
+    var cartList = new List<Cart>();
+    if (Session.Count != 0 && Session["Cart"] != null)
+    {
+        cartList = (List<Cart>)Session["Cart"];
+    }
+}
+
+<script>
+    function clear_cart() {
+        $.post('@Url.Action("ClearCart", "Home")',
+            { }, ReformContent);
+    }
+
+    function add_cart(id) {
+        $.post('@Url.Action("AddToCart", "Home")',
+            { "id": id }, ReformContent);
+    }
+
+    function rem_cart(id){
+        $.post('@Url.Action("RemFromCart", "Home")',
+        { "id": id }, ReformContent);
+    }
+
+    //Create HTML for a dropdown for product model using the selected bike category as a filter
+    function ReformContent(data) {
+        var products = data.products;
+        var newCart = "";
+        if (data.Status == "OK") {
+            location.reload();
+        } else {
+            alert("An unexpected error has occured!");
+        }
+    }
+</script>
+
+<h2>Cart</h2>
+
+<table id="cart_table" class="table" align="center">
+    <tr>
+        <td>Name</td>
+        <td>Price</td>
+    </tr>
+    @for (var i = 0; i < cartList.Count; i++)
+    {
+        <tr>
+            <td>@cartList[i].Name</td>
+            <td>@cartList[i].Price</td>
+            <td><input type="button" value="Delete" class="btn btn-default" onclick="rem_cart(@cartList[i].productID)" /></td>
+        </tr>
+    }
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="button" value="Clear Cart" class="btn btn-default" onclick="clear_cart()" />
+    </div>
+</div>
